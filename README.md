@@ -8,4 +8,5 @@ Projeto para matéria de Desenvolvimento de Sistemas de Informação.
 - Nathan Nunes: RA. 626708
 - Pedro Vitor: RA. 616230
 - Ynuan Cruz: RA. 615749
+<br/>
 Líder: Nathan Nunes.
