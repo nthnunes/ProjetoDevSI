@@ -2,6 +2,27 @@
 
 Projeto para matéria de Desenvolvimento de Sistemas de Informação.
 
+# Linguagens
+
+- Backend:
+    - Python
+
+    - Bibliotecas:
+        - flask
+        - flask_ngrok
+        - pymongo
+
+- Frontend:
+    - HTML
+    - CSS
+    - JavaScript
+
+    - Recursos:
+        - Ajax
+
+- Banco de Dados:
+    - MongoDB
+
 # Participantes
 
 - Guilherme Miranda: RA. 616060
