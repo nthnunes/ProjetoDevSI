@@ -4,21 +4,22 @@ Projeto para matéria de Desenvolvimento de Sistemas de Informação.
 
 # Tecnologias Backend
 
-    - Python
-        - flask
-        - flask_ngrok
-        - pymongo
+- Python
+    - flask
+    - flask_ngrok
+    - pymongo
 
 # Frontend / Recursos
 
-    - HTML
-    - CSS
-    - JavaScript
-        - Ajax
+- HTML
+- CSS
+    - Bootstrap
+- JavaScript
+    - Ajax
 
 # Banco de Dados
 
-    - MongoDB
+- MongoDB
 
 # Participantes
 
