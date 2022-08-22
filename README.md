@@ -2,25 +2,22 @@
 
 Projeto para matéria de Desenvolvimento de Sistemas de Informação.
 
-# Linguagens
+# Tecnologias Backend
 
-- Backend:
     - Python
-
-    - Bibliotecas:
         - flask
         - flask_ngrok
         - pymongo
 
-- Frontend:
+# Frontend / Recursos
+
     - HTML
     - CSS
     - JavaScript
-
-    - Recursos:
         - Ajax
 
-- Banco de Dados:
+# Banco de Dados
+
     - MongoDB
 
 # Participantes
