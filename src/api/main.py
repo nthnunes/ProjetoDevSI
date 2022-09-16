@@ -1,12 +1,14 @@
 from flask import Flask, Response, jsonify, request
 from bson.objectid import ObjectId
+from datetime import datetime
 from database import dbConnection
 from users import User
+from local import Local
 
-print("$ MongoDB Credentials:")
-db = dbConnection(input("Username: "), input("Password: "))
+db = dbConnection("root", "devsiproject")
 
-opc = int(input("Run app:\n1 - Local\n2 - In my network\n3 - TCP Tunnel\nOption: "))
+#opc = int(input("Run app:\n1 - Local\n2 - In my network\n3 - TCP Tunnel\nOption: "))
+opc = 2
 
 app = Flask(__name__)
 if opc == 3:
@@ -22,13 +24,13 @@ def homepage():
 def login():
     req = request.get_json()
     coll = db.get_collection('users')
-    data = coll.find_one({'email': req['email']})
+    query = coll.find_one({'email': req['email']})
 
-    if data == None:
+    if query == None:
         return Response(status=403)
 
-    if data['senha'] == req['senha']:
-        return jsonify({'id': str(data['_id']), 'permissao': data['permissao']})
+    if query['senha'] == req['senha']:
+        return jsonify({'id': str(query['_id']), 'permissao': query['permissao']})
     else:
         return Response(status=401)
     
@@ -51,7 +53,109 @@ def register():
     return Response(status=200)
 
 
-@app.route('/password')
+@app.route('/infos')
+def infos():
+    reservas = 0
+    cancelamentos = 0
+    ganhos = 0
+    locados = 0
+    locadosAno = 0
+
+    coll = db.get_collection('reserva')
+    start = datetime(datetime.now().year, datetime.now().month, 1)
+    end = datetime(datetime.now().year, datetime.now().month, 30)
+
+    query = coll.find({'status': 'aberto', 'data': {'$gte': start, '$lt': end}})
+    for item in query:
+        reservas = reservas + 1
+
+    query = coll.find({'status': 'cancelado', 'data': {'$gte': start, '$lt': end}})
+    for item in query:
+        cancelamentos = cancelamentos + 1
+
+    query = coll.find({'status': 'fechado', 'data': {'$gte': start, '$lt': end}})
+    for item in query:
+        ganhos = ganhos + item['valor']
+
+    query = coll.find({'status': 'fechado', 'data': {'$gte': start, '$lt': end}})
+    for item in query:
+        locados = locados + 1
+
+    start = datetime(datetime.now().year, 1, 1)
+    end = datetime(datetime.now().year, 12, 30)
+    query = coll.find({'status': 'fechado', 'data': {'$gte': start, '$lt': end}})
+    for item in query:
+        locadosAno = locadosAno + 1
+
+    data = {
+        'reservas': reservas,
+        'cancelamentos': cancelamentos,
+        'ganhos': ganhos,
+        'locados': locados,
+        'locadosAno': locadosAno
+    }
+    
+    return jsonify(data)
+
+
+# retorna as datas reservadas do calendário
+@app.route('/calendar')
+def calendar():
+    # cria um objeto com as informações dos locais do BD
+    coll = db.get_collection('local')
+    query = coll.find()
+    locais = []
+    for local in query:
+        locais.append(Local(local['nome'], local['valor'], str(local['_id'])))
+
+    # identifica a quais locais as reservas pertecem e add ao respectivo objeto
+    coll = db.get_collection('reserva')
+    query = coll.find({"status": {'$ne': 'cancelado'}})
+    for reserva in query:
+        for local in locais:
+            if local.getId() == str(reserva['id_local']):
+                local.addReserva(str(reserva['_id']))
+
+    # construção do json
+    data = []
+    for local in locais:
+        days = []
+        for i in local.getReservas():
+            query = coll.find_one({"_id": ObjectId(i)})
+            days.append(query['data'].strftime('%Y-%m-%d'))
+
+        temp = {
+            "nome": local.getNome(),
+                "reservas": days
+        }
+        data.append(temp)
+
+    res = {
+        "data": data
+    }
+
+    return res
+
+
+# nao terminado
+@app.route('/searchCalendar')
+def searchCalendar():
+    req = request.get_json()
+    coll = db.get_collection('reserva')
+    find = datetime(req['year'], req['month'], req['day'])
+    query = coll.find_one({"data": find})
+
+    date = query['data']
+
+    coll = db.get_collection('apto')
+    query = coll.find_one({"_id": ObjectId(str(query['_id']))})
+
+    print(query)
+
+    return Response(status=200)
+
+
+@app.route('/password', methods=['GET', 'POST'])
 def changePassword():
     req = request.get_json()
     coll = db.get_collection('users')
