@@ -173,7 +173,7 @@ def calendar():
 
 
 # busca informações de uma reserva
-@app.route('/searchCalendar')
+@app.route('/searchcalendar')
 def searchCalendar():
     req = request.get_json()
 
@@ -268,17 +268,19 @@ def recent():
         res = {
             'data': data
         }
-
         return res
 
 
-@app.route('/addApto')
-def addLocal():
+@app.route('/apto')
+def addApto():
     req = request.get_json()
     coll = db.get_collection('apto')
 
-    apto = Apto(req['descricao'], req['numero'])
+    if 'type' in req:
+        coll.delete_one({'numero': req['numero']})
+        return Response(status=200)
 
+    apto = Apto(req['descricao'], req['numero'])
     data = {
         'numero': apto.getNumero(),
         'descricao': apto.getDescricao(),
@@ -325,6 +327,37 @@ def configs():
     if 'min' in req:
         coll.update_one({"_id": id}, {'$set': {"dias_min_reserva": req['min']}})
 
+    return Response(status=200)
+
+
+@app.route('/local')
+def local():
+    req = request.get_json()
+    coll = db.get_collection('local')
+
+    if req['type'] == "get":
+        query = coll.find()
+
+        data = []
+        for local in query:
+            temp = {
+                'nome': local['nome'],
+                'valor': local['valor']
+            }
+            data.append(temp)
+        return {'data': data}
+
+    if req['type'] == "delete":
+        coll.delete_one({'nome': req['nome']})
+        return Response(status=200)
+
+    local = Local(req['nome'], req['valor'])
+
+    if req['type'] == "edit":
+        coll.update_one({'nome': local.getNome()}, {'$set': {'valor': local.getValor()}})
+        return Response(status=200)
+
+    coll.insert_one({'nome': local.getNome(), 'valor': local.getValor()})
     return Response(status=200)
 
 
