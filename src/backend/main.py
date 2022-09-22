@@ -15,10 +15,6 @@ if opc == 3:
     from flask_ngrok import run_with_ngrok
     run_with_ngrok(app)
 
-@app.route('/')
-def homepage():
-    return {"Name": "Condominium API", "Status": "OK", "Author": "Nathan Nunes"}
-
 
 @app.route('/login')
 def login():
