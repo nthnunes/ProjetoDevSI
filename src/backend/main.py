@@ -6,10 +6,9 @@ from users import User
 from apto import Apto
 from local import Local
 
-db = dbConnection("root", "devsiproject")
+db = dbConnection("", "")
 
-#opc = int(input("Run app:\n1 - Local\n2 - In my network\n3 - TCP Tunnel\nOption: "))
-opc = 2
+opc = int(input("Run app:\n1 - Local\n2 - In my network\n3 - TCP Tunnel\nOption: "))
 
 app = Flask(__name__)
 if opc == 3:
@@ -277,8 +276,13 @@ def addApto():
     coll = db.get_collection('apto')
 
     if 'type' in req:
+        if coll.find_one({'numero': req['numero']}) == None:
+            return Response(status=404)
         coll.delete_one({'numero': req['numero']})
         return Response(status=200)
+
+    if coll.find_one({'numero': req['numero']}) != None:
+        return Response(status=409)
 
     apto = Apto(req['descricao'], req['numero'])
     data = {
