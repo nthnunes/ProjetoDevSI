@@ -140,7 +140,6 @@ def infos():
         'locados': locados,
         'locadosAno': locadosAno
     }
-    
     return data
 
 
@@ -175,12 +174,7 @@ def calendar():
             "reservas": days
         }
         data.append(temp)
-
-    res = {
-        "data": data
-    }
-
-    return res
+    return {'data': data}
 
 
 # busca informações de uma reserva
@@ -249,11 +243,7 @@ def recent():
             }
             data.append(temp)
 
-        res = {
-            'data': data
-        }
-
-        return res
+        return {'data': data}
     else:
         coll = db.get_collection('apto')
         query = coll.find_one({"id_user": ObjectId(req['id'])})
@@ -276,10 +266,7 @@ def recent():
             }
             data.append(temp)
         
-        res = {
-            'data': data
-        }
-        return res
+        return {'data': data}
 
 
 @app.route('/apto')
