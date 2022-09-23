@@ -1,4 +1,4 @@
 
 *.pyc
-src/api/test.py
 src/backend/test.py
+.vercel
