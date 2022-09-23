@@ -1,7 +1,7 @@
 from flask import Flask, Response, request
 from bson.objectid import ObjectId
 from datetime import datetime
-from database import dbConnection
+from utils import dbConnection, sendEmail
 from users import User
 from apto import Apto
 from local import Local
@@ -94,6 +94,37 @@ def register():
     coll = db.get_collection('apto')
     coll.update_one({"token": req['token']}, {'$set': {'token': apto.getToken()}})
     
+    return Response(status=200)
+
+
+# redefinir senha
+@app.route('/resetpassword')
+def resetPassword():
+    req = request.get_json()
+
+    # verifica se a requisição deve retornar o token ou editar a senha
+    if 'email' in req:
+        coll = db.get_collection('users')
+        query = coll.find_one({'email': req['email']})
+
+        # se o email estiver cadastrado no banco faz o envio do token
+        if query != None:
+            coll = db.get_collection('apto')
+            query = coll.find_one({'id_user': query['_id']})
+            sendEmail(req['email'], query['token'])
+        return Response(status=200)
+
+    # busca o token no banco
+    coll = db.get_collection('apto')
+    query = coll.find_one({'token': req['token']})
+
+    # verifica se o token foi encontrado
+    if query == None:
+        return Response(status=401)
+    
+    # altera a senha
+    coll = db.get_collection('users')
+    coll.update_one({'_id': query['id_user']}, {'$set': {'senha': req['senha']}})
     return Response(status=200)
 
 
@@ -372,5 +403,5 @@ def transferUser():
 
 
 if __name__ == '__main__':
-    #app.run(host="0.0.0.0", port=3000)
-    app.run()
+    app.run(host="0.0.0.0", port=3000)
+    #app.run()
