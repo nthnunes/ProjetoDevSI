@@ -34,27 +34,31 @@ def login():
         return Response(status=401)
     
 
+# cadastro de usuário
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     req = request.get_json()
 
+    # verifica se o email a ser cadastrado já existe no banco
     coll = db.get_collection('users')
     query = coll.find_one({'email': req['email']})
     if query != None:
         return Response(status=401)
 
+    # faz uma query em busca do token fornecido pelo usuário
     coll = db.get_collection('apto')
     query = coll.find_one({'token': req['token']})
 
+    # verifica se o token pertence a algum apartamento
     if query == None:
         return Response(status=401)
 
+    # verifica se algum usuário já pertence ao apartamento
     if 'id_user' in query:
         apto = Apto(query['descricao'], query['numero'], str(query['_id']), str(query['id_user']))
         user = User(req['email'], req['senha'], req['nome'], req['telefone'], False)
 
-        coll.update_one({"token": req['token']}, {'$set': {'token': apto.getToken()}})
-
+        # substitui os dados do usuário existente pelo dados fornecidos
         coll = db.get_collection('users')
         coll.update_one({"_id": query['id_user']}, {'$set': {
             "email": user.getEmail(),
@@ -63,6 +67,8 @@ def register():
             "telefone": user.getTelefone(),
             "permissao": user.getPermissao()
         }})
+
+    # caso n exista nenhum usuário linkado com o apto esse user será criado no banco e linkado com o apto
     else:
         user = User(req['email'], req['senha'], req['nome'], req['telefone'], False)
         data = {
@@ -73,12 +79,22 @@ def register():
             "permissao": user.getPermissao()
         }
 
+        # insere o novo usuário na tabela de users
         coll = db.get_collection('users')
         coll.insert_one(data)
         query = coll.find_one({'email': user.getEmail()})
 
+        # linka o apto com o novo usuário
         coll = db.get_collection('apto')
         coll.update_one({"token": req['token']}, {'$set': {'id_user': query['_id']}})
+
+        # cria um objeto apto para poder acessar a geração de token
+        query = coll.find_one({'token': req['token']})
+        apto = Apto(query['descricao'], query['numero'], str(query['_id']), str(query['id_user']))
+
+    # gera um novo token para o apto
+    coll = db.get_collection('apto')
+    coll.update_one({"token": req['token']}, {'$set': {'token': apto.getToken()}})
     
     return Response(status=200)
 
