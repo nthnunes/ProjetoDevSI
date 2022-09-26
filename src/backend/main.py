@@ -1,7 +1,7 @@
 from flask import Flask, Response, request
 from bson.objectid import ObjectId
 from datetime import datetime
-from utils import dbConnection, sendEmail
+from utils import dbConnection, sendEmail, dayDiff
 from users import User
 from apto import Apto
 from local import Local
@@ -137,8 +137,10 @@ def infos():
     locadosAno = 0
 
     coll = db.get_collection('reserva')
-    start = datetime(datetime.now().year, datetime.now().month, 1)
-    end = datetime(datetime.now().year, datetime.now().month, 30)
+    year = datetime.now().year
+    month = datetime.now().month
+    start = datetime(year, month, 1)
+    end = datetime(year, month, dayDiff(year, month))
 
     query = coll.find({'status': 'aberto', 'data': {'$gte': start, '$lt': end}})
     for item in query:
@@ -156,8 +158,8 @@ def infos():
     for item in query:
         locados = locados + 1
 
-    start = datetime(datetime.now().year, 1, 1)
-    end = datetime(datetime.now().year, 12, 30)
+    start = datetime(year, 1, 1)
+    end = datetime(year, 12, dayDiff(year, 12))
     query = coll.find({'status': 'fechado', 'data': {'$gte': start, '$lt': end}})
     for item in query:
         locadosAno = locadosAno + 1

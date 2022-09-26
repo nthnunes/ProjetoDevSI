@@ -32,3 +32,23 @@ def dbConnection(username, password):
     client = MongoClient(CONNECTION_STRING)
 
     return client.get_database('devsi')
+
+
+def dayDiff(year, month):
+    if month == 2:
+        if (year % 4) == 0:
+            return 29
+        else:
+            return 28
+    
+    if (year % 2) == 0:
+        diff = 31
+        diff2 = 30
+    else:
+        diff = 30
+        diff2 = 31
+
+    if (month % 2) == 0:
+        return diff
+    else:
+        return diff2
