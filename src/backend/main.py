@@ -24,6 +24,14 @@ def login():
         return Response(status=403)
 
     if query['senha'] == req['senha']:
+        coll = db.get_collection('reserva')
+        data = coll.find({'status': 'aberto'})
+
+        now = datetime(datetime.now().year, datetime.now().month, datetime.now().day)
+        for reserva in data:
+            if (reserva['data'] - now).days <= 0:
+                coll.update_one({"_id": reserva['_id']}, {'$set': {'status': 'fechado'}})
+
         if query['permissao'] == True:
             return {'id': str(query['_id']), 'permissao': query['permissao']}
         else:
@@ -235,7 +243,6 @@ def searchCalendar():
         'telefone': query['telefone'],
         'valor': valor
     }
-
     return data
 
 
