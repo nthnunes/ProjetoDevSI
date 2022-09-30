@@ -1,14 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-
 }
 
 body {
     min-height: 100vh;
     background-color: #ffffff;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     display: grid;
     place-items: center;
 }
@@ -23,7 +24,7 @@ body {
     height: 37rem;
     padding: 4rem;
     margin-top: 73px;
-    border-radius: 50px;
+    border-radius: 57px;
 
 }
 
@@ -76,21 +77,22 @@ h1 {
 }
 
 h2 {
-
+    font-weight: unset;
     color: white;
     font-size: 25px;
 }
 
 input {
+    font-size: medium;
+    color: white;
     margin-top: 15px;
     margin-bottom: 15px;
-    border-radius: 5px;
     width: 100%;
     border: none;
     transition: 0.15s linear;
-    padding: 25px;
+    padding: 20px;
     background-color: #007092;
-
+    border-radius: 10px;
 }
 
 input:focus {
@@ -99,6 +101,7 @@ input:focus {
 }
 
 label {
+    font-weight: 500;
     font-size: 20px;
     width: 100%;
     color: white;
@@ -127,8 +130,7 @@ button {
     padding: 20px;
     color: white;
     background-color: #001c24;
-    border-radius: 13px;
-
+    border-radius: 10px;
 }
 
 .cadastro1 {
@@ -139,7 +141,6 @@ button {
     border: none;
     padding: 20px;
     background-color: #001c24;
-
 }
 
 /*
