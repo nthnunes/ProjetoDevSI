@@ -1,15 +1,21 @@
-function api(url, body){
+async function api(url, body){
     url = "https://devsiproject.vercel.app" + url
 
-    let request = new XMLHttpRequest()
-    request.open("GET", url, true)
-    request.setRequestHeader("Content-type", "application/json")
+    const headers = new Headers({
+        "Content-Type": "application/json"
+    })
 
-    request.onload = () => {
-        console.log(this.responseText)
-        console.log(this.status)
+    const payload = {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(body)
     }
-    request.send(body)
+
+    let req = await fetch(url, payload)
+        .then(response => response.json())
+    localStorage.setItem("id", req.id)
+
+    return req.permissao
 }
 
 function login(){
@@ -25,4 +31,5 @@ function login(){
     }
 
     api(route, body)
+        .then(response => console.log(response))
 }
