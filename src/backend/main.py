@@ -1,4 +1,5 @@
 from flask import Flask, Response, request
+from flask_cors import CORS
 from bson.objectid import ObjectId
 from datetime import datetime
 from utils import dbConnection, sendEmail, dayDiff
@@ -8,6 +9,7 @@ from local import Local
 
 db = dbConnection("", "")
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def homepage():
