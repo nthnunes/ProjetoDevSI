@@ -13,9 +13,16 @@ async function api(url, body, method){
 
     let req = await fetch(url, payload)
         .then(response => response)
-    let data = await req.json()
 
-    return {"req": req, "data": data}
+    if(req.status == 200) {
+        let data = await req.json()
+        return {"req": req, "data": data}
+    }
+    
+    return new PromiseRejectionEvent("unhandledrejection", {
+        promise: req,
+        reason: "Failed request."
+    })
 }
 
 function login(){
@@ -35,4 +42,5 @@ function login(){
             localStorage.setItem("id", response.data.id)
             console.log(response.req.status)
         })
+        .catch(response => console.log('Login failed.'))
 }
