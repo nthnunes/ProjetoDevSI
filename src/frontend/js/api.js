@@ -1,4 +1,4 @@
-export async function api(url, body, method, res){
+async function api(url, body, method, res){
     url = "https://devsiproject.vercel.app" + url
 
     const headers = new Headers({
@@ -27,3 +27,5 @@ export async function api(url, body, method, res){
         reason: "Failed request."
     })
 }
+
+export default api;
