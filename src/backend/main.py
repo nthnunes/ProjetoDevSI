@@ -16,7 +16,7 @@ def homepage():
     return {"Name": "Condominium API", "Status": "OK", "Author": "Nathan Nunes"}
 
 
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def login():
     req = request.get_json()
     coll = db.get_collection('users')
@@ -43,7 +43,7 @@ def login():
     
 
 # cadastro de usuário
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST'])
 def register():
     req = request.get_json()
 
@@ -108,7 +108,7 @@ def register():
 
 
 # redefinir senha
-@app.route('/resetpassword')
+@app.route('/resetpassword', methods=['POST'])
 def resetPassword():
     req = request.get_json()
 
@@ -138,7 +138,7 @@ def resetPassword():
     return Response(status=200)
 
 
-@app.route('/infos')
+@app.route('/infos', methods=['GET'])
 def infos():
     reservas = 0
     cancelamentos = 0
@@ -185,7 +185,7 @@ def infos():
 
 
 # retorna as datas reservadas do calendário
-@app.route('/calendar')
+@app.route('/calendar', methods=['GET'])
 def calendar():
     # cria um objeto com as informações dos locais do BD
     coll = db.get_collection('local')
@@ -219,7 +219,7 @@ def calendar():
 
 
 # busca informações de uma reserva
-@app.route('/searchcalendar')
+@app.route('/searchcalendar', methods=['POST'])
 def searchCalendar():
     req = request.get_json()
 
@@ -248,7 +248,7 @@ def searchCalendar():
     return data
 
 
-@app.route('/recent')
+@app.route('/recent', methods=['POST'])
 def recent():
     req = request.get_json()
     coll = db.get_collection('users')
@@ -309,7 +309,7 @@ def recent():
         return {'data': data}
 
 
-@app.route('/apto')
+@app.route('/apto', methods=['POST'])
 def addApto():
     req = request.get_json()
     coll = db.get_collection('apto')
@@ -334,7 +334,7 @@ def addApto():
     return Response(status=200)
 
 
-@app.route('/password')
+@app.route('/password', methods=['POST'])
 def changePassword():
     req = request.get_json()
     coll = db.get_collection('users')
@@ -347,7 +347,7 @@ def changePassword():
     return Response(status=200)
 
 
-@app.route('/options')
+@app.route('/options', methods=['POST'])
 def configs():
     req = request.get_json()
 
@@ -373,7 +373,7 @@ def configs():
     return Response(status=200)
 
 
-@app.route('/local')
+@app.route('/local', methods=['POST'])
 def local():
     req = request.get_json()
     coll = db.get_collection('local')
@@ -404,7 +404,7 @@ def local():
     return Response(status=200)
 
 
-@app.route('/transfer')
+@app.route('/transfer', methods=['POST'])
 def transferUser():
     req = request.get_json()
     coll = db.get_collection('apto')
