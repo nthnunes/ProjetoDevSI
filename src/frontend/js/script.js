@@ -1,4 +1,4 @@
-async function api(url, body){
+async function api(url, body, method){
     url = "https://devsiproject.vercel.app" + url
 
     const headers = new Headers({
@@ -6,16 +6,16 @@ async function api(url, body){
     })
 
     const payload = {
-        method: 'POST',
+        method: method,
         headers: headers,
         body: JSON.stringify(body)
     }
 
     let req = await fetch(url, payload)
-        .then(response => response.json())
-    localStorage.setItem("id", req.id)
+        .then(response => response)
+    let data = await req.json()
 
-    return req.permissao
+    return {"req": req, "data": data}
 }
 
 function login(){
@@ -30,6 +30,9 @@ function login(){
         "senha": senha
     }
 
-    api(route, body)
-        .then(response => console.log(response))
+    api(route, body, 'POST')
+        .then(response => {
+            localStorage.setItem("id", response.data.id)
+            console.log(response.req.status)
+        })
 }
