@@ -1,4 +1,4 @@
-async function api(url, body, method){
+async function api(url, body, method, res){
     url = "https://devsiproject.vercel.app" + url
 
     const headers = new Headers({
@@ -15,8 +15,11 @@ async function api(url, body, method){
         .then(response => response)
 
     if(req.status == 200) {
-        let data = await req.json()
-        return {"req": req, "data": data}
+        if(res == true){
+            let data = await req.json()
+            return {"req": req, "data": data}
+        }
+        return {"req": req}
     }
     
     return new PromiseRejectionEvent("unhandledrejection", {
@@ -29,18 +32,31 @@ function login(){
     event.preventDefault()
     route = "/login"
 
-    let email = document.getElementById("email").value
-    let senha = document.getElementById("senha").value
-
     body = {
-        "email": email,
-        "senha": senha
+        "email": document.getElementById("email").value,
+        "senha": document.getElementById("senha").value
     }
 
-    api(route, body, 'POST')
+    api(route, body, 'POST', true)
         .then(response => {
             localStorage.setItem("id", response.data.id)
             console.log(response.req.status)
         })
         .catch(response => console.log('Login failed.'))
+}
+
+function register(){
+    event.preventDefault()
+    route = "/register"
+
+    body = {
+        "token": document.getElementById("token").value,
+        "nome": document.getElementById("nome").value,
+        "telefone": document.getElementById("telefone").value,
+        "email": document.getElementById("email").value,
+        "senha": document.getElementById("senha").value
+    }
+
+    api(route, body, 'POST', false)
+        .then(response => console.log(response))
 }
