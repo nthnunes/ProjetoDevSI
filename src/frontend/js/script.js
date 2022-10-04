@@ -40,9 +40,9 @@ function login(){
     api(route, body, 'POST', true)
         .then(response => {
             localStorage.setItem("id", response.data.id)
-            console.log(response.req.status)
+            localStorage.setItem("nome", response.data.nome)
         })
-        .catch(response => console.log('Login failed.'))
+        .catch(response => window.alert("Login incorreto, verifique seu email e senha."))
 }
 
 function register(){
