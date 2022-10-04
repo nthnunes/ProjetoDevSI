@@ -58,5 +58,11 @@ function register(){
     }
 
     api(route, body, 'POST', false)
-        .then(response => console.log(response))
+        .then(response => {
+            if(response.req.status == 200){
+                window.alert("Cadastro concluído, efetue o login para prosseguir.")
+                window.location = "https://nthnunes.github.io/ProjetoDevSI/";
+            }
+        })
+        .catch(response => window.alert("Ocorreu um erro, verifique o token."))
 }
