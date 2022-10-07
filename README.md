@@ -6,8 +6,8 @@ Projeto para matéria de Desenvolvimento de Sistemas de Informação.
 
 - Python
     - flask
-    - flask_ngrok
     - pymongo
+    - vercel
 
 # Frontend / Recursos
 
@@ -19,7 +19,7 @@ Projeto para matéria de Desenvolvimento de Sistemas de Informação.
 
 # Banco de Dados
 
-- MongoDB
+- MongoDB Atlas
 
 # Participantes
 
