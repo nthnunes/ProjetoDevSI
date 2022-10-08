@@ -125,6 +125,7 @@ button {
     color: white;
     background-color: #001c24;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .cadastro1 {

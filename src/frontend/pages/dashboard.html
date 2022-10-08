@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/src/frontend/css/painel_adm.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <div class="informacoes">Cancelamento no mês</div>
+        <div class="informacoes">Ganhos do mês</div>
+        <div class="informacoes">Locados do mês</div>
+        <div class="informacoes">Locados do ano</div>
+        <div class="informacoes">Reservas do mês</div>
+      </div>
+      <div class="esquerda">
+        <label> Painel de Controle</label>
+        <a href="#"> Editar minha senha</a>
+        <a href="#"> Configurações do sistema</a>
+        <a href="#"> Configurações de alugueis</a>
+        <a href="#"> Transferir usuário</a>
+        <a href="#"> Gerenciar apartamentos</a>
+        <a href="../../../index.html"> Sair</a>
+      </div>
+      <div class="meio">
+        <div class="light">
+          <div class="calendar">
+            <div class="calendar-header">
+              
+              <span class="month-picker" id="month-picker"></span><p>de</p>
+              <div class="year-picker">
+                <!-- <span class="year-change" id="prev-year">
+                  <pre></pre>
+                </span> -->
+                <span id="year"></span>
+                
+                <!-- <span class="year-change" id="next-year">
+                  <pre></pre>
+                </span> -->
+              </div>
+              <div class="location-picker">Local : </div>
+            </div>
+            <div class="calendar-body">
+              <div class="calendar-week-day">
+                <div>Domingo</div>
+                <div>Segunda</div>
+                <div>Terça</div>
+                <div>Quarta</div>
+                <div>Quinta</div>
+                <div>Sexta</div>
+                <div>sábado</div>
+              </div>
+              <div class="calendar-days"></div>
+            </div>
+            <!-- <div class="calendar-footer">
+              <div class="toggle">
+                <span>Dark Mode</span>
+                <div class="dark-mode-switch">
+                  <div class="dark-mode-switch-ident"></div>
+                </div>
+              </div>
+            </div> -->
+            <div class="month-list"></div>
+          </div>
+        </div>
+      </div>
+      <div class="direita">
+        <div class="agendamentos">
+          <div class="nome">Pedro</div>
+          <div class="dia">22/12/2022</div>
+          <div class="lugar">Salão Presidencial</div>
+        </div>
+        <div class="agendamentos">
+          <div class="nome">Pedro</div>
+          <div class="dia">22/12/2022</div>
+          <div class="lugar">Salão Presidencial</div>
+        </div>
+        <div class="agendamentos">
+          <div class="nome">Pedro</div>
+          <div class="dia">22/12/2022</div>
+          <div class="lugar">Salão Presidencial</div>
+        </div>
+        <div class="agendamentos">
+          <div class="nome">Pedro</div>
+          <div class="dia">22/12/2022</div>
+          <div class="lugar">Salão Presidencial</div>
+        </div>
+        <div class="agendamentos">
+          <div class="nome">Pedro</div>
+          <div class="dia">22/12/2022</div>
+          <div class="lugar">Salão Presidencial</div>
+        </div>
+      </div>
+    </div>
+    <script src="/src/frontend/js/calendario.js"></script>
+  </body>
+</html>
+
