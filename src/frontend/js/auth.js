@@ -22,5 +22,12 @@ async function api(id){
 }
 
 api(window.localStorage.getItem('id'))
-    .then(response => console.log(response))
-    .catch(response => window.location.replace("https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/forbidden.html"))
+    .then(response => {
+        if(response.req.status == 200){
+            console.log(JSON.stringify(response.data))
+        }
+    })
+    .catch(response => {
+        localStorage.clear()
+        window.location.replace("https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/forbidden.html")
+    })
