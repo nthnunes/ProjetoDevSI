@@ -30,6 +30,5 @@ api(window.localStorage.getItem('id'))
     .catch(response => {
         localStorage.clear()
         window.location.replace("https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/forbidden.html")
-        setTimeout(10000)
-        window.location.replace("https://nthnunes.github.io/ProjetoDevSI/")
+        setTimeout(window.location.replace("https://nthnunes.github.io/ProjetoDevSI/"), 10000)
     })
