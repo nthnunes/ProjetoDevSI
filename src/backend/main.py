@@ -138,8 +138,17 @@ def resetPassword():
     return Response(status=200)
 
 
-@app.route('/infos', methods=['GET'])
+@app.route('/infos', methods=['POST'])
 def infos():
+    req = request.get_json()
+    coll = db.get_collection('users')
+    query = coll.find_one({'_id': ObjectId(req['id'])})
+
+    if query == None:
+        return Response(status=401)
+    if query['permissao'] != True:
+        return Response(status=401)
+
     reservas = 0
     cancelamentos = 0
     ganhos = 0
