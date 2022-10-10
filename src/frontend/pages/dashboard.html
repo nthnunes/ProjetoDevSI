@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Admin - Dashboard</title>
     <link rel="stylesheet" href="../css/painel_adm.css" />
   </head>
   <body>
@@ -23,7 +23,15 @@
         <a href="#"> Configurações de alugueis</a>
         <a href="#"> Transferir usuário</a>
         <a href="#"> Gerenciar apartamentos</a>
-        <a href="../../../index.html"> Sair</a>
+        <a id="exit"> Sair</a>
+        <script>
+          document.getElementById("exit").onclick = function() {
+            if(confirm("Tem certeza que deseja sair?")){
+              localStorage.clear();
+              window.location.replace("https://nthnunes.github.io/ProjetoDevSI/")
+            }
+          }
+        </script>
       </div>
       <div class="meio">
         <div class="light">

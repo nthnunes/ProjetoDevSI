@@ -69,10 +69,3 @@ function register(){
         })
         .catch(response => window.alert("Ocorreu um erro, verifique o token."))
 }
-
-function exit(){
-    if(confirm("Tem certeza que sair?")){
-        localStorage.clear();
-        window.location.replace("https://nthnunes.github.io/ProjetoDevSI/")
-    }
-}
