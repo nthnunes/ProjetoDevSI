@@ -39,8 +39,11 @@ function login(){
 
     api(route, body, 'POST', true)
         .then(response => {
-            localStorage.setItem("id", response.data.id)
-            localStorage.setItem("nome", response.data.nome)
+            if(response.req.status == 200){
+                localStorage.setItem("id", response.data.id)
+                localStorage.setItem("nome", response.data.nome)
+                window.location.replace("https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/dashboard.html")
+            }
         })
         .catch(response => window.alert("Login incorreto, verifique seu email e senha."))
 }
@@ -65,4 +68,11 @@ function register(){
             }
         })
         .catch(response => window.alert("Ocorreu um erro, verifique o token."))
+}
+
+function exit(){
+    if(confirm("Tem certeza que sair?")){
+        localStorage.clear();
+        window.location.replace("https://nthnunes.github.io/ProjetoDevSI/")
+    }
 }
