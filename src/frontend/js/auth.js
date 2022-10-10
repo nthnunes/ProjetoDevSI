@@ -29,5 +29,6 @@ api(window.localStorage.getItem('id'))
     })
     .catch(response => {
         localStorage.clear()
-        window.location.replace("https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/forbidden.html")
+        window.location.replace("https://nthnunes.github.io/ProjetoDevSI/")
+        window.alert("Access refused")
     })
