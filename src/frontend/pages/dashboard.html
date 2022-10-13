@@ -1,3 +1,4 @@
+<script src="../js/auth.js"></script>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -8,7 +9,6 @@
     <link rel="stylesheet" href="../css/painel_adm.css" />
   </head>
   <body>
-    <script src="../js/auth.js"></script>
     <div class="container">
       <div class="nav">
         <div class="informacoes">Cancelamento no mês</div>
@@ -24,15 +24,7 @@
         <button class = 'botoes_esquerda' href="#"> Configurações de alugueis</button>
         <button class = 'botoes_esquerda' href="#"> Transferir usuário</button>
         <button class = 'botoes_esquerda' href="#"> Gerenciar apartamentos</button>
-        <button class = 'botoes_esquerda' id="exit" href="#"> Sair</button>
-        <script>
-          document.getElementById("exit").onclick = function() {
-            if(confirm("Tem certeza que deseja sair?")){
-              localStorage.clear()
-              window.location.replace("https://nthnunes.github.io/ProjetoDevSI/")
-            }
-          }
-        </script>
+        <button onclick="exit()" class = 'botoes_esquerda' id="exit" href="#"> Sair</button>
       </div>
       <div class="meio">
         <div class="light">
@@ -105,6 +97,7 @@
       </div>
     </div>
     <script src="../js/calendario.js"></script>
+    <script src="../js/utils.js"></script>
   </body>
 </html>
 
