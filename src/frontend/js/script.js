@@ -41,8 +41,12 @@ function login(){
         .then(response => {
             if(response.req.status == 200){
                 localStorage.setItem("id", response.data.id)
-                localStorage.setItem("nome", response.data.nome)
-                window.location.replace("https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/dashboard.html")
+                if(response.data.permissao == true){
+                    window.location.replace("https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/dashboard.html")
+                }
+                else{
+                    localStorage.setItem("nome", response.data.nome)
+                }
             }
         })
         .catch(response => window.alert("Login incorreto, verifique seu email e senha."))
