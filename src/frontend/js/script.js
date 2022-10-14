@@ -57,7 +57,7 @@ function register(){
     route = "/register"
 
     pwd = document.getElementById("senha").value
-    regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/g;
+    regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,25}$/g;
     if(pwd.match(regex) == null) {
         window.alert("A senha deve conter ao menos uma letra minúscula, uma letra maiúscula, um número e um caracter especial, tente novamente!")
         return false
