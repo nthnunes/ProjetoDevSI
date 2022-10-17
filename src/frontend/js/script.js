@@ -56,6 +56,13 @@ function register(){
     event.preventDefault()
     route = "/register"
 
+    email = document.getElementById("email").value
+    regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if(email.match(regex) == null){
+        window.alert("Insira um email válido.")
+        return false
+    }
+
     pwd = document.getElementById("senha").value
     regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,25}$/g;
     if(pwd.match(regex) == null) {
@@ -84,6 +91,13 @@ function register(){
 function forgetPassword(){
     event.preventDefault()
     route = "/resetpassword"
+
+    email = document.getElementById("email").value
+    regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    if(email.match(regex) == null){
+        window.alert("Insira um email válido.")
+        return false
+    }
 
     body = {
         "email": document.getElementById("email").value
