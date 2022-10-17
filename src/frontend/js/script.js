@@ -80,3 +80,42 @@ function register(){
         })
         .catch(response => window.alert("Ocorreu um erro, verifique o token."))
 }
+
+function forgetPassword(){
+    event.preventDefault()
+    route = "/resetpassword"
+
+    body = {
+        "email": document.getElementById("email").value
+    }
+
+    api(route, body, 'POST', false)
+        .then(response => {
+            window.alert("Se os dados estiverem corretos você receberá um email contendo um token para redifinir sua senha.")
+            window.location = "https://nthnunes.github.io/ProjetoDevSI/"
+        })
+}
+
+function resetPassword(){
+    event.preventDefault()
+    route = "/resetpassword"
+
+    if(document.getElementById("senha").value != document.getElementById("confirm").value){
+        window.alert("As senhas não coincidem, tente novamente!")
+        return false
+    }
+
+    body = {
+        "token": document.getElementById("token").value,
+        "senha": document.getElementById("senha").value
+    }
+
+    api(route, body, 'POST', false)
+        .then(response => {
+            if(response.req.status == 200){
+                window.alert("Sua senha foi alterada com sucesso.")
+                window.location.replace("https://nthnunes.github.io/ProjetoDevSI/")
+            }
+        })
+        .catch(response => window.alert("Token inválido!"))
+}
