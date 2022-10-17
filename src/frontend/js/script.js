@@ -105,6 +105,13 @@ function resetPassword(){
         return false
     }
 
+    pwd = document.getElementById("senha").value
+    regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,25}$/g;
+    if(pwd.match(regex) == null) {
+        window.alert("A senha deve conter ao menos 8 caracteres, uma letra minúscula, uma letra maiúscula, um número e um caracter especial, tente novamente!")
+        return false
+    }
+
     body = {
         "token": document.getElementById("token").value,
         "senha": document.getElementById("senha").value
