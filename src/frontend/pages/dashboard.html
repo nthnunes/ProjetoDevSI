@@ -97,14 +97,14 @@
         </div>
       </div>
       <div id = "aparecer"class = "modal">
-        <form class="formulario_modal">
-        <label class = "senha">Senha Atual</label>
-        <input class = "input"type="password"required >
-        <label class = "senha" >Nova Senha</label>
-        <input class = "input" type="password" required >
-        <label class = "senha" >Confirmar Nova Senha</label>
-        <input class = "input" type="password" required >
-        <button class = "botao_modal" >Alterar</button>
+        <form onsubmit="changePassword()" class="formulario_modal">
+        <label class="senha">Senha Atual</label>
+        <input id="password" class="input" type="password"required >
+        <label class="senha" >Nova Senha</label>
+        <input id="newpassword" class="input" type="password" required >
+        <label class="senha" >Confirmar Nova Senha</label>
+        <input id="confirm" class="input" type="password" required >
+        <button class="botao_modal" >Alterar</button>
       </form>
       </div>
     </div>
