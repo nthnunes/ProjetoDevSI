@@ -20,7 +20,7 @@
       </div>
       <div class="esquerda">
         <label> Painel de Controle</label>
-        <button class = 'botoes_esquerda' href="#"> Editar minha senha</button>
+        <button id = "aparecer_modal"class = 'botoes_esquerda'  href="#"> Editar minha senha</button>
         <button class = 'botoes_esquerda' href="#"> Configurações do sistema</button>
         <button class = 'botoes_esquerda' href="#"> Configurações de alugueis</button>
         <button class = 'botoes_esquerda' href="#"> Transferir usuário</button>
@@ -96,9 +96,32 @@
           <div class="lugar">Salão Presidencial</div>
         </div>
       </div>
+      <div id = "aparecer"class = "modal">
+        <form class="formulario_modal">
+        <label class = "senha">Senha Atual</label>
+        <input class = "input"type="password"required >
+        <label class = "senha" >Nova Senha</label>
+        <input class = "input" type="password" required >
+        <label class = "senha" >Confirmar Nova Senha</label>
+        <input class = "input" type="password" required >
+        <button class = "botao_modal" >Alterar</button>
+      </form>
+      </div>
     </div>
     <script src="../js/calendario.js"></script>
     <script src="../js/utils.js"></script>
+    <script>
+      var btn = document.getElementById('aparecer_modal');
+      var modal = document.querySelector('.modal');
+      btn.addEventListener('click', function() {
+    
+        if(modal.style.display === 'grid') {
+          modal.style.display = 'none';
+        } else {
+          modal.style.display = 'grid';
+        }
+      });
+    </script>
   </body>
 </html>
 
