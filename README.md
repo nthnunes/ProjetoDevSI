@@ -7,7 +7,7 @@ Projeto para matéria de Desenvolvimento de Sistemas de Informação.
 - Python
     - flask
     - pymongo
-    - vercel
+- Vercel
 
 # Frontend / Recursos
 
