@@ -46,6 +46,7 @@ function login(){
                 }
                 else{
                     localStorage.setItem("nome", response.data.nome)
+                    window.location.replace("https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/client.html")
                 }
             }
         })
