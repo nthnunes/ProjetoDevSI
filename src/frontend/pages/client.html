@@ -12,8 +12,10 @@
   <body>
     <nav class = "navbar">
       <h1 class="bem_vindo">Bem Vindo !</h1>
-      <div><button class = "editar_senha">Editar Minha Senha</button>
-        <button class = "sair">Sair</button></div>
+      <div>
+        <button onclick="changePassword()" class="editar_senha">Editar Minha Senha</button>
+        <button onclick="exit()" class="sair">Sair</button>
+      </div>
     </nav>
     
     <section class = "content">
@@ -94,5 +96,6 @@
         </div>
     </section>
     <script src="../js/calendario.js"></script>
+    <script src="../js/utils.js"></script>
   </body>
 </html>
