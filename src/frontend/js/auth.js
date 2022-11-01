@@ -24,8 +24,9 @@ async function api(id){
 api(window.localStorage.getItem('id'))
     .then(response => {
         if(response.req.status == 200){
-            if(response.data.permissao == true){
-                console.log(JSON.stringify(response.data))
+            if(response.data.permissao == false){
+                const welcome = document.getElementById("bem-vindo")
+                welcome.innerText = window.localStorage.getItem("nome")
             }
         }
     })
