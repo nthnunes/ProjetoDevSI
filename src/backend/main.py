@@ -148,7 +148,7 @@ def infos():
     if query == None:
         return Response(status=401)
     if query['permissao'] != True:
-        return Response(status=401)
+        return {"permissao": query['permissao']}
 
     reservas = 0
     cancelamentos = 0
@@ -289,12 +289,12 @@ def recent():
 
             temp = {
                 'nome': nome,
-                'data': date,
+                'data': date.strftime("%d/%m/%Y"),
                 'local': query['nome']
             }
             data.append(temp)
 
-        return {'data': data}
+        return {'data': data, 'permissao': True}
     else:
         coll = db.get_collection('apto')
         query = coll.find_one({"id_user": ObjectId(req['id'])})
@@ -315,12 +315,12 @@ def recent():
 
             temp = {
                 'local': query['nome'],
-                'data': date,
+                'data': date.strftime("%d/%m/%Y"),
                 'valor': valor
             }
             data.append(temp)
         
-        return {'data': data}
+        return {'data': data, 'permissao': False}
 
 
 @app.route('/apto', methods=['POST'])
