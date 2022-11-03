@@ -2,3 +2,4 @@
 *.pyc
 src/backend/test.py
 .vercel
+.vscode
