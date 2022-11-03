@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto DevSI</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../img/favicon.ico">
+</head>
+<body>
+    <div class="card_novo">
+        <h1 class="novo">É novo por aqui ?</h1>
+        <br><br>
+        <h2>Para realizar seu registro entre em contato e peça a liberação do seu acesso.</h2>
+        <button id="contact">Entrar em contato</button>
+        <script>
+            document.getElementById("contact").onclick = function() {
+                window.open("https://api.whatsapp.com/send?phone=5514998152367", '_blank').focus()
+            }
+        </script>
+        <br>
+        <br>
+        <h1 class="novo">Já possui um token?</h1>
+        <br>
+        <h2>Insira o token fornecido e faça seu registro</h2>
+        <br>
+        <br>
+        <button id="token">Já tenho um token!</button>
+        <script>
+            document.getElementById("token").onclick = function() {
+                window.location = "https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/cadastro.html"
+            }
+        </script>
+    </div>
+</body>
+</html>

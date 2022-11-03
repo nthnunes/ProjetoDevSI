@@ -1,0 +1,76 @@
+<script src="../js/auth.js"></script>
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styles_tela_clientes.css" />
+    <link rel="icon" href="../img/favicon.ico">
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <nav class = "navbar">
+      <h1 class="bem_vindo">Bem Vindo, <strong id="bem-vindo">Undefined</strong>!</h1>
+      <div>
+        <button onclick="changePassword()" class="editar_senha">Editar Minha Senha</button>
+        <button onclick="exit()" class="sair">Sair</button>
+      </div>
+    </nav>
+    
+    <section class = "content">
+        <div class="calendario">
+            <h1 class = "titulo">Calendario</h1>
+            <div class="light">
+                <div class="calendar">
+                  <div class="calendar-header">
+                    <span class="month-picker" id="month-picker"></span>
+                    <p>de</p>
+                    <div class="year-picker">
+                      <!-- <span class="year-change" id="prev-year">
+                        <pre></pre>
+                      </span> -->
+                      <span id="year"></span>
+      
+                      <!-- <span class="year-change" id="next-year">
+                        <pre></pre>
+                      </span> -->
+                    </div>
+                    <div class="location-picker">Local :</div>
+                  </div>
+                  <div class="calendar-body">
+                    <div class="calendar-week-day">
+                      <div>Domingo</div>
+                      <div>Segunda</div>
+                      <div>Terça</div>
+                      <div>Quarta</div>
+                      <div>Quinta</div>
+                      <div>Sexta</div>
+                      <div>sábado</div>
+                    </div>
+                    <div class="calendar-days"></div>
+                  </div>
+                  <!-- <div class="calendar-footer">
+                    <div class="toggle">
+                      <span>Dark Mode</span>
+                      <div class="dark-mode-switch">
+                        <div class="dark-mode-switch-ident"></div>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="month-list"></div>
+                </div>
+              </div>
+            </div>
+      
+        <div class="meus_alugueis">
+            <h1 class = "titulo">Meus Alugueis</h1>
+            <div id="recent" class="direita"></div>
+            </div>
+        </div>
+    </section>
+    <script src="../js/calendario.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/getInfos.js"></script>
+  </body>
+</html>

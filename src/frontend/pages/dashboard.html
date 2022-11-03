@@ -1,0 +1,236 @@
+<script src="../js/auth.js"></script>
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Dashboard</title>
+    <link rel="stylesheet" href="../css/painel_adm.css" />
+    <link rel="icon" href="../img/admin.ico" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <div class="informacoes">Cancelamento no mês</div>
+        <div class="informacoes">Ganhos do mês</div>
+        <div class="informacoes">Locados do mês</div>
+        <div class="informacoes">Locados do ano</div>
+        <div class="informacoes">Reservas do mês</div>
+      </div>
+      <div class="esquerda">
+        <label> Painel de Controle</label>
+        <button id="aparecer_modal" class="botoes_esquerda" href="#">
+          Editar minha senha
+        </button>
+        <button id="aparecer_modal2" class="botoes_esquerda" href="#">
+          Configurações do sistema
+        </button>
+        <button id="aparecer_modal3" class="botoes_esquerda" href="#">
+          Configurações de alugueis
+        </button>
+        <button id="aparecer_modal4" class="botoes_esquerda" href="#">Transferir usuário</button>
+        <button id="aparecer_modal5" class="botoes_esquerda" href="#">Gerenciar apartamentos</button>
+        <button onclick="exit()" class="botoes_esquerda" id="exit" href="#">
+          Sair
+        </button>
+      </div>
+      <div class="meio">
+        <div class="light">
+          <div class="calendar">
+            <div class="calendar-header">
+              <span class="month-picker" id="month-picker"></span>
+              <p>de</p>
+              <div class="year-picker">
+                <!-- <span class="year-change" id="prev-year">
+                  <pre></pre>
+                </span> -->
+                <span id="year"></span>
+
+                <!-- <span class="year-change" id="next-year">
+                  <pre></pre>
+                </span> -->
+              </div>
+              <div class="location-picker">Local :</div>
+            </div>
+            <div class="calendar-body">
+              <div class="calendar-week-day">
+                <div>Domingo</div>
+                <div>Segunda</div>
+                <div>Terça</div>
+                <div>Quarta</div>
+                <div>Quinta</div>
+                <div>Sexta</div>
+                <div>sábado</div>
+              </div>
+              <div class="calendar-days"></div>
+            </div>
+            <!-- <div class="calendar-footer">
+              <div class="toggle">
+                <span>Dark Mode</span>
+                <div class="dark-mode-switch">
+                  <div class="dark-mode-switch-ident"></div>
+                </div>
+              </div>
+            </div> -->
+            <div class="month-list"></div>
+          </div>
+        </div>
+      </div>
+      <div id="recent" class="direita"></div>
+      <div id="aparecer" class="modal">
+        <form onsubmit="changePassword()" class="formulario_modal">
+          <label class="senha">Senha Atual</label>
+          <input id="password" class="input" type="password" required />
+          <label class="senha">Nova Senha</label>
+          <input id="newpassword" class="input" type="password" required />
+          <label class="senha">Confirmar Nova Senha</label>
+          <input id="confirm" class="input" type="password" required />
+          <button class="botao_modal">Alterar</button>
+        </form>
+      </div>
+      <div id="aparecer" class="modal2">
+        <form onsubmit="changePassword()" class="formulario_modal">
+          <label class="senha">Dias Para Cancelamento</label>
+          <input id="password" class="input" type="text" required />
+          <label class="senha">Dias Máximos Para Reserva</label>
+          <input id="newpassword" class="input" type="text" required />
+          <label class="senha">Dias Mínimos Para Reserva</label>
+          <input id="confirm" class="input" type="text" required />
+          <button class="botao_modal">Salvar</button>
+        </form>
+      </div>
+      <div id="aparecer" class="modal3">
+        <form onsubmit="changePassword()" class="formulario_modal">
+          <label class="senha">Selecionar Local</label>
+          <select id="password" class="input" type="text" required>
+            <option value="">Selecione um Local</option>
+            <option value="">Local 1 </option>
+            <option value="">Local 2 </option>
+            <option value="">Local 3 </option>
+          </select>
+          <label class="senha" >Valor</label>
+          <input id="newpassword"class="input" type="number" required/>
+          <button class="botao_modal">Salvar</button>
+          <button class="botao_modal2">Excluir local</button>
+        </form>
+      </div>
+      <div id="aparecer" class="modal4">
+        <form onsubmit="changePassword()" class="formulario_modal">
+          <label class="senha">Buscar Apartamento</label>
+          <select id="password" class="input" type="text" required>
+            <option value="">Selecione</option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+          </select>
+          <label class="senha">Token</label>
+          <input id="newpassword" class="input" type="text" href="#" />
+          <button class="botao_modal">Fechar</button>
+        </form>
+      </div>
+      <div id="aparecer" class="modal5">
+        <form onsubmit="changePassword()" class="formulario_modal">
+          <label class="senha">Número do Apartamento</label>
+          <input id="password" class="input" type="number" required />
+          <label class="senha">Descrição</label>
+          <input id="confirm" class="input" type="text" required />
+          <button class="botao_modal">Adicionar</button>
+          <button class="botao_modal2">Excluir</button>
+          <button class="botao_modal3">Cancelar</button>
+        </form>
+      </div>
+    </div>
+    <script src="../js/calendario.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/getInfos.js"></script>
+    <script>
+
+      var btn = document.getElementById("aparecer_modal");
+      var modal = document.querySelector(".modal");
+      btn.addEventListener("click", function () {
+        if (modal.style.display === "grid") {
+          modal.style.display = "none";
+        } else {
+          modal.style.display = "grid";
+        }
+      });
+
+    document.addEventListener('mouseup', function(e) {
+    var container = document.querySelector('#aparecer_modal');
+    var modal = document.querySelector(".modal");
+    if (!container.contains(e.target)) {
+      modal.style.display = 'none';
+    }
+});
+
+
+      var btn2 = document.getElementById("aparecer_modal2");
+      var modal2 = document.querySelector(".modal2");
+      btn2.addEventListener("click", function () {
+        if (modal2.style.display === "grid") {
+          modal2.style.display = "none";
+        } else {
+          modal2.style.display = "grid";
+        }
+      });
+
+      document.addEventListener('mouseup', function(e) {
+    var container = document.querySelector('#aparecer_modal2');
+    var modal = document.querySelector(".modal2");
+    if (!container.contains(e.target)) {
+      modal.style.display = 'none';
+    }
+});
+
+      var btn3 = document.getElementById("aparecer_modal3");
+      var modal3 = document.querySelector(".modal3");
+      btn3.addEventListener("click", function () {
+        if (modal3.style.display === "grid") {
+          modal3.style.display = "none";
+        } else {
+          modal3.style.display = "grid";
+        }
+      });
+      document.addEventListener('mouseup', function(e) {
+    var container = document.querySelector('#aparecer_modal3');
+    var modal = document.querySelector(".modal3");
+    if (!container.contains(e.target)) {
+      modal.style.display = 'none';
+    }
+});
+      var btn4 = document.getElementById("aparecer_modal4");
+      var modal4 = document.querySelector(".modal4");
+      btn4.addEventListener("click", function () {
+        if (modal4.style.display === "grid") {
+          modal4.style.display = "none";
+        } else {
+          modal4.style.display = "grid";
+        }
+      });
+      document.addEventListener('mouseup', function(e) {
+    var container = document.querySelector('#aparecer_modal4');
+    var modal = document.querySelector(".modal4");
+    if (!container.contains(e.target)) {
+      modal.style.display = 'none';
+    }
+});
+      var btn5 = document.getElementById("aparecer_modal5");
+      var modal5 = document.querySelector(".modal5");
+      btn5.addEventListener("click", function () {
+        if (modal5.style.display === "grid") {
+          modal5.style.display = "none";
+        } else {
+          modal5.style.display = "grid";
+        }
+      });
+      document.addEventListener('mouseup', function(e) {
+    var container = document.querySelector('#aparecer_modal5');
+    var modal = document.querySelector(".modal5");
+    if (!container.contains(e.target)) {
+      modal.style.display = 'none';
+    }
+});
+    </script>
+  </body>
+</html>
