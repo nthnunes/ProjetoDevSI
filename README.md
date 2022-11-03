@@ -15,7 +15,6 @@ Projeto para matéria de Desenvolvimento de Sistemas de Informação.
 - CSS
     - Bootstrap
 - JavaScript
-    - Ajax
 
 # Banco de Dados
 
