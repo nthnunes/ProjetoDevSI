@@ -1,3 +1,4 @@
+from pymongo import ASCENDING
 from flask import Flask, Response, request
 from flask_cors import CORS
 from bson.objectid import ObjectId
@@ -263,16 +264,17 @@ def recent():
     coll = db.get_collection('users')
     query = coll.find_one({"_id": ObjectId(req['id'])})
 
+    cont = 0
     if query['permissao'] == True:
         coll = db.get_collection('reserva')
-
-        start = datetime(datetime.now().year, datetime.now().month, 1)
-        end = datetime(datetime.now().year, datetime.now().month, 30)
-        
-        query = coll.find({'status': 'aberto', 'data': {'$gte': start, '$lt': end}})
+        query = coll.find({'status': 'aberto'}).sort('data', ASCENDING)
 
         data = []
         for reserva in query:
+            cont = cont + 1
+            if cont > 5:
+                break
+
             date = reserva['data']
             idLocal = reserva['id_local']
 
@@ -298,10 +300,13 @@ def recent():
         query = coll.find_one({"id_user": ObjectId(req['id'])})
 
         coll = db.get_collection('reserva')
-        query = coll.find({"id_apto": query['_id'], 'status': 'aberto'})
+        query = coll.find({"id_apto": query['_id'], 'status': 'aberto'}).sort('data', ASCENDING)
 
         data = []
         for reserva in query:
+            cont = cont + 1
+            if cont > 5:
+                break
             date = reserva['data']
             valor = reserva['valor']
 
