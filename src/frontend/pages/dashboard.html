@@ -12,11 +12,11 @@
   <body>
     <div class="container">
       <div class="nav">
-        <div class="informacoes">Cancelamento no mês</div>
-        <div class="informacoes">Ganhos do mês</div>
-        <div class="informacoes">Locados do mês</div>
-        <div class="informacoes">Locados do ano</div>
-        <div class="informacoes">Reservas do mês</div>
+        <div class="informacoes">Cancelamento no mês<p></p id = "informacoes"></div>
+        <div class="informacoes">Ganhos do mês<br><br><p id = "informacoes"></p></div>
+        <div class="informacoes">Locados do mês<br><br><p id = "informacoes"></p></div>
+        <div class="informacoes">Locados do ano<br><br><p id = "informacoes"></p></div>
+        <div class="informacoes">Reservas do mês<br><br><p id = "informacoes"></p></div>
       </div>
       <div class="esquerda">
         <label> Painel de Controle</label>
@@ -79,65 +79,68 @@
       </div>
       <div id="recent" class="direita"></div>
       <div id="aparecer" class="modal">
-        <form onsubmit="changePassword()" class="formulario_modal">
+        <form  class="formulario_modal" >
           <label class="senha">Senha Atual</label>
-          <input id="password" class="input" type="password" required />
+          <input  class="input" type="password"  />
           <label class="senha">Nova Senha</label>
-          <input id="newpassword" class="input" type="password" required />
+          <input  class="input" type="password"  />
           <label class="senha">Confirmar Nova Senha</label>
-          <input id="confirm" class="input" type="password" required />
+          <input id="confirm" class="input" type="password"  />
           <button class="botao_modal">Alterar</button>
+          <button id = "fechar_modal" class="botao_modal3">Cancelar</button>
         </form>
       </div>
       <div id="aparecer" class="modal2">
-        <form onsubmit="changePassword()" class="formulario_modal">
+        <form  class="formulario_modal">
           <label class="senha">Dias Para Cancelamento</label>
-          <input id="password" class="input" type="text" required />
+          <input  class="input" type="text"  />
           <label class="senha">Dias Máximos Para Reserva</label>
-          <input id="newpassword" class="input" type="text" required />
+          <input  class="input" type="text"  />
           <label class="senha">Dias Mínimos Para Reserva</label>
-          <input id="confirm" class="input" type="text" required />
+          <input id="confirm" class="input" type="text"  />
           <button class="botao_modal">Salvar</button>
+          <button id = "fechar_modal" class="botao_modal3">Cancelar</button>
         </form>
       </div>
       <div id="aparecer" class="modal3">
-        <form onsubmit="changePassword()" class="formulario_modal">
+        <form  class="formulario_modal">
           <label class="senha">Selecionar Local</label>
-          <select id="password" class="input" type="text" required>
+          <select  class="input" type="text" >
             <option value="">Selecione um Local</option>
             <option value="">Local 1 </option>
             <option value="">Local 2 </option>
             <option value="">Local 3 </option>
           </select>
           <label class="senha" >Valor</label>
-          <input id="newpassword"class="input" type="number" required/>
+          <input class="input" type="number" />
           <button class="botao_modal">Salvar</button>
           <button class="botao_modal2">Excluir local</button>
+          <button id = "fechar_modal" class="botao_modal3">Cancelar</button>
         </form>
       </div>
       <div id="aparecer" class="modal4">
-        <form onsubmit="changePassword()" class="formulario_modal">
+        <form  class="formulario_modal">
           <label class="senha">Buscar Apartamento</label>
-          <select id="password" class="input" type="text" required>
+          <select  class="input" type="text" >
             <option value="">Selecione</option>
             <option value=""></option>
             <option value=""></option>
             <option value=""></option>
           </select>
           <label class="senha">Token</label>
-          <input id="newpassword" class="input" type="text" href="#" />
-          <button class="botao_modal">Fechar</button>
+          <input class="input" type="text" href="#" />
+           <button id = "fechar_modal" class="botao_modal3">Cancelar</button>
         </form>
       </div>
       <div id="aparecer" class="modal5">
-        <form onsubmit="changePassword()" class="formulario_modal">
+        <form  class="formulario_modal">
           <label class="senha">Número do Apartamento</label>
-          <input id="password" class="input" type="number" required />
+          <input  class="input" type="number"  />
           <label class="senha">Descrição</label>
-          <input id="confirm" class="input" type="text" required />
+          <input id="confirm" class="input" type="text"  />
           <button class="botao_modal">Adicionar</button>
           <button class="botao_modal2">Excluir</button>
-          <button class="botao_modal3">Cancelar</button>
+          <button id = "fechar_modal" class="botao_modal3">Cancelar</button>
         </form>
       </div>
     </div>
@@ -156,14 +159,6 @@
         }
       });
 
-    document.addEventListener('mouseup', function(e) {
-    var container = document.querySelector('#aparecer_modal');
-    var modal = document.querySelector(".modal");
-    if (!container.contains(e.target)) {
-      modal.style.display = 'none';
-    }
-});
-
 
       var btn2 = document.getElementById("aparecer_modal2");
       var modal2 = document.querySelector(".modal2");
@@ -175,13 +170,7 @@
         }
       });
 
-      document.addEventListener('mouseup', function(e) {
-    var container = document.querySelector('#aparecer_modal2');
-    var modal = document.querySelector(".modal2");
-    if (!container.contains(e.target)) {
-      modal.style.display = 'none';
-    }
-});
+     
 
       var btn3 = document.getElementById("aparecer_modal3");
       var modal3 = document.querySelector(".modal3");
@@ -192,13 +181,7 @@
           modal3.style.display = "grid";
         }
       });
-      document.addEventListener('mouseup', function(e) {
-    var container = document.querySelector('#aparecer_modal3');
-    var modal = document.querySelector(".modal3");
-    if (!container.contains(e.target)) {
-      modal.style.display = 'none';
-    }
-});
+    
       var btn4 = document.getElementById("aparecer_modal4");
       var modal4 = document.querySelector(".modal4");
       btn4.addEventListener("click", function () {
@@ -208,13 +191,7 @@
           modal4.style.display = "grid";
         }
       });
-      document.addEventListener('mouseup', function(e) {
-    var container = document.querySelector('#aparecer_modal4');
-    var modal = document.querySelector(".modal4");
-    if (!container.contains(e.target)) {
-      modal.style.display = 'none';
-    }
-});
+      
       var btn5 = document.getElementById("aparecer_modal5");
       var modal5 = document.querySelector(".modal5");
       btn5.addEventListener("click", function () {
@@ -224,13 +201,52 @@
           modal5.style.display = "grid";
         }
       });
-      document.addEventListener('mouseup', function(e) {
-    var container = document.querySelector('#aparecer_modal5');
-    var modal = document.querySelector(".modal5");
-    if (!container.contains(e.target)) {
-      modal.style.display = 'none';
-    }
-});
+
+      var btn_cancelar = document.getElementById("fechar_modal")
+      var modal = document.querySelector(".modal");
+      btn_cancelar.addEventListener("click", function () {
+        if (modal.style.display === "grid") {
+          modal.style.display = "none";
+        } else {
+          modal.style.display = "grid";
+        }
+      });
+      var btn_cancelar = document.getElementById("fechar_modal")
+      var modal = document.querySelector(".modal2");
+      btn_cancelar.addEventListener("click", function () {
+        if (modal.style.display === "grid") {
+          modal.style.display = "none";
+        } else {
+          modal.style.display = "grid";
+        }
+      });
+      var btn_cancelar = document.getElementById("fechar_modal")
+      var modal = document.querySelector(".modal3");
+      btn_cancelar.addEventListener("click", function () {
+        if (modal.style.display === "grid") {
+          modal.style.display = "none";
+        } else {
+          modal.style.display = "grid";
+        }
+      });
+      var btn_cancelar = document.getElementById("fechar_modal")
+      var modal = document.querySelector(".modal4");
+      btn_cancelar.addEventListener("click", function () {
+        if (modal.style.display === "grid") {
+          modal.style.display = "none";
+        } else {
+          modal.style.display = "grid";
+        }
+      });
+      var btn_cancelar = document.getElementById("fechar_modal")
+      var modal = document.querySelector(".modal5");
+      btn_cancelar.addEventListener("click", function () {
+        if (modal.style.display === "grid") {
+          modal.style.display = "none";
+        } else {
+          modal.style.display = "grid";
+        }
+      });
     </script>
   </body>
 </html>
