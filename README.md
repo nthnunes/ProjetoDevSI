@@ -13,7 +13,6 @@ Projeto para matéria de Desenvolvimento de Sistemas de Informação.
 
 - HTML
 - CSS
-    - Bootstrap
 - JavaScript
 
 # Banco de Dados
