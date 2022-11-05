@@ -20,17 +20,17 @@
       </div>
       <div class="esquerda">
         <label> Painel de Controle</label>
-        <button id="aparecer_modal" class="botoes_esquerda" href="#">
+        <button id="" onclick = "aparecer('editar_senha')" class="botoes_esquerda" href="#">
           Editar minha senha
         </button>
-        <button id="aparecer_modal2" class="botoes_esquerda" href="#">
+        <button id="" onclick ="aparecer('config_sistema')" class="botoes_esquerda" href="#">
           Configurações do sistema
         </button>
-        <button id="aparecer_modal3" class="botoes_esquerda" href="#">
+        <button id="" onclick ="aparecer('config_alugueis')" class="botoes_esquerda" href="#">
           Configurações de alugueis
         </button>
-        <button id="aparecer_modal4" class="botoes_esquerda" href="#">Transferir usuário</button>
-        <button id="aparecer_modal5" class="botoes_esquerda" href="#">Gerenciar apartamentos</button>
+        <button id="" onclick ="aparecer('transferir_ususario')" class="botoes_esquerda" href="#">Transferir usuário</button>
+        <button id="" onclick ="aparecer('gerenciar_apartamentos')" class="botoes_esquerda" href="#">Gerenciar apartamentos</button>
         <button onclick="exit()" class="botoes_esquerda" id="exit" href="#">
           Sair
         </button>
@@ -78,8 +78,9 @@
         </div>
       </div>
       <div id="recent" class="direita"></div>
-      <div id="aparecer" class="modal">
-        <form  class="formulario_modal" >
+
+      <div id="editar_senha" class="modal">
+        <form  class="formulario_modal"></form>
           <label class="senha">Senha Atual</label>
           <input  class="input" type="password"  />
           <label class="senha">Nova Senha</label>
@@ -87,10 +88,12 @@
           <label class="senha">Confirmar Nova Senha</label>
           <input id="confirm" class="input" type="password"  />
           <button class="botao_modal">Alterar</button>
-          <button id = "fechar_modal" class="botao_modal3">Cancelar</button>
+          <div id = "" onclick="desaparecer('editar_senha')"class="botao_modal3">Cancelar</div>
         </form>
       </div>
-      <div id="aparecer" class="modal2">
+
+     
+      <div id="config_sistema" class="modal">
         <form  class="formulario_modal">
           <label class="senha">Dias Para Cancelamento</label>
           <input  class="input" type="text"  />
@@ -99,10 +102,10 @@
           <label class="senha">Dias Mínimos Para Reserva</label>
           <input id="confirm" class="input" type="text"  />
           <button class="botao_modal">Salvar</button>
-          <button id = "fechar_modal" class="botao_modal3">Cancelar</button>
+          <div id = "" onclick="desaparecer('config_sistema')"class="botao_modal3">Cancelar</div>
         </form>
       </div>
-      <div id="aparecer" class="modal3">
+      <div id="config_alugueis" class="modal">
         <form  class="formulario_modal">
           <label class="senha">Selecionar Local</label>
           <select  class="input" type="text" >
@@ -115,10 +118,10 @@
           <input class="input" type="number" />
           <button class="botao_modal">Salvar</button>
           <button class="botao_modal2">Excluir local</button>
-          <button id = "fechar_modal" class="botao_modal3">Cancelar</button>
+          <div id = "" onclick="desaparecer('config_alugueis')"class="botao_modal3">Cancelar</div>
         </form>
       </div>
-      <div id="aparecer" class="modal4">
+      <div id="transferir_ususario" class="modal">
         <form  class="formulario_modal">
           <label class="senha">Buscar Apartamento</label>
           <select  class="input" type="text" >
@@ -129,10 +132,10 @@
           </select>
           <label class="senha">Token</label>
           <input class="input" type="text" href="#" />
-           <button id = "fechar_modal" class="botao_modal3">Cancelar</button>
+           <div id = "" onclick="desaparecer('transferir_ususario')" class="botao_modal3">Cancelar</div>
         </form>
       </div>
-      <div id="aparecer" class="modal5">
+      <div id="gerenciar_apartamentos" class="modal">
         <form  class="formulario_modal">
           <label class="senha">Número do Apartamento</label>
           <input  class="input" type="number"  />
@@ -140,113 +143,33 @@
           <input id="confirm" class="input" type="text"  />
           <button class="botao_modal">Adicionar</button>
           <button class="botao_modal2">Excluir</button>
-          <button id = "fechar_modal" class="botao_modal3">Cancelar</button>
+          <div id = "" onclick="desaparecer('gerenciar_apartamentos')"class="botao_modal3">Cancelar</div>
         </form>
       </div>
     </div>
+    
     <script src="../js/calendario.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/getInfos.js"></script>
     <script>
-
-      var btn = document.getElementById("aparecer_modal");
-      var modal = document.querySelector(".modal");
-      btn.addEventListener("click", function () {
-        if (modal.style.display === "grid") {
-          modal.style.display = "none";
-        } else {
-          modal.style.display = "grid";
-        }
-      });
-
-
-      var btn2 = document.getElementById("aparecer_modal2");
-      var modal2 = document.querySelector(".modal2");
-      btn2.addEventListener("click", function () {
-        if (modal2.style.display === "grid") {
-          modal2.style.display = "none";
-        } else {
-          modal2.style.display = "grid";
-        }
-      });
-
-     
-
-      var btn3 = document.getElementById("aparecer_modal3");
-      var modal3 = document.querySelector(".modal3");
-      btn3.addEventListener("click", function () {
-        if (modal3.style.display === "grid") {
-          modal3.style.display = "none";
-        } else {
-          modal3.style.display = "grid";
-        }
-      });
-    
-      var btn4 = document.getElementById("aparecer_modal4");
-      var modal4 = document.querySelector(".modal4");
-      btn4.addEventListener("click", function () {
-        if (modal4.style.display === "grid") {
-          modal4.style.display = "none";
-        } else {
-          modal4.style.display = "grid";
-        }
-      });
       
-      var btn5 = document.getElementById("aparecer_modal5");
-      var modal5 = document.querySelector(".modal5");
-      btn5.addEventListener("click", function () {
-        if (modal5.style.display === "grid") {
-          modal5.style.display = "none";
-        } else {
-          modal5.style.display = "grid";
-        }
-      });
+        function aparecer(id){
+          var display = document.getElementById(id).style.display;
 
-      var btn_cancelar = document.getElementById("fechar_modal")
-      var modal = document.querySelector(".modal");
-      btn_cancelar.addEventListener("click", function () {
-        if (modal.style.display === "grid") {
-          modal.style.display = "none";
-        } else {
-          modal.style.display = "grid";
+          if (display = "none")
+            document.getElementById(id).style.display = 'grid';
+          else
+            document.getElementById(id).style.display = 'none';
         }
-      });
-      var btn_cancelar = document.getElementById("fechar_modal")
-      var modal = document.querySelector(".modal2");
-      btn_cancelar.addEventListener("click", function () {
-        if (modal.style.display === "grid") {
-          modal.style.display = "none";
-        } else {
-          modal.style.display = "grid";
+        function desaparecer(id){
+          var display = document.getElementById(id).style.display;
+
+          if (display == "none")
+            document.getElementById(id).style.display = 'grid';
+          else
+            document.getElementById(id).style.display = 'none';
         }
-      });
-      var btn_cancelar = document.getElementById("fechar_modal")
-      var modal = document.querySelector(".modal3");
-      btn_cancelar.addEventListener("click", function () {
-        if (modal.style.display === "grid") {
-          modal.style.display = "none";
-        } else {
-          modal.style.display = "grid";
-        }
-      });
-      var btn_cancelar = document.getElementById("fechar_modal")
-      var modal = document.querySelector(".modal4");
-      btn_cancelar.addEventListener("click", function () {
-        if (modal.style.display === "grid") {
-          modal.style.display = "none";
-        } else {
-          modal.style.display = "grid";
-        }
-      });
-      var btn_cancelar = document.getElementById("fechar_modal")
-      var modal = document.querySelector(".modal5");
-      btn_cancelar.addEventListener("click", function () {
-        if (modal.style.display === "grid") {
-          modal.style.display = "none";
-        } else {
-          modal.style.display = "grid";
-        }
-      });
+
     </script>
   </body>
 </html>
