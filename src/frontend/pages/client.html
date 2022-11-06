@@ -13,14 +13,14 @@
     <nav class = "navbar">
       <h1 class="bem_vindo">Bem Vindo, <strong id="bem-vindo">Undefined</strong>!</h1>
       <div>
-        <button onclick="changePassword()" class="editar_senha">Editar Minha Senha</button>
+        <button onclick="aparecer('editar_senha')" class="editar_senha">Editar Minha Senha</button>
         <button onclick="exit()" class="sair">Sair</button>
       </div>
     </nav>
     
     <section class = "content">
         <div class="calendario">
-            <h1 class = "titulo">Calendario</h1>
+            <h1 class = "titulo">Calendário</h1>
             <div class="light">
                 <div class="calendar">
                   <div class="calendar-header">
@@ -69,8 +69,38 @@
             </div>
         </div>
     </section>
+    <div id="editar_senha" class="modal">
+      <form  class="formulario_modal"></form>
+        <label class="senha">Senha Atual</label>
+        <input  class="input" type="password"  />
+        <label class="senha">Nova Senha</label>
+        <input  class="input" type="password"  />
+        <label class="senha">Confirmar Nova Senha</label>
+        <input id="confirm" class="input" type="password"  />
+        <button class="botao_modal">Alterar</button>
+        <div id = "" onclick="desaparecer('editar_senha')"class="botao_modal3">Cancelar</div>
+      </form>
+    </div>
     <script src="../js/calendario.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/getInfos.js"></script>
+    <script>
+      function aparecer(id){
+          var display = document.getElementById(id).style.display;
+
+          if (display = "none")
+            document.getElementById(id).style.display = 'grid';
+          else
+            document.getElementById(id).style.display = 'none';
+        }
+        function desaparecer(id){
+          var display = document.getElementById(id).style.display;
+
+          if (display == "none")
+            document.getElementById(id).style.display = 'grid';
+          else
+            document.getElementById(id).style.display = 'none';
+        }
+    </script>
   </body>
 </html>
