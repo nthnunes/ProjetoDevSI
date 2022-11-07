@@ -31,7 +31,6 @@ async function api(url, body, method, res){
 function changeOptions(){
     event.preventDefault()
     route = "/options"
-    console.log("passou")
 
     if(document.getElementById("dias-cancel").value != ""){
         api(route, {"cancel": document.getElementById("dias-cancel").value}, 'POST', false)
@@ -66,4 +65,21 @@ function reloadOptions(){
             document.getElementById("dias-max").placeholder = response.data.max
             document.getElementById("dias-min").placeholder = response.data.min
         })
+}
+
+function getLocalValue(){
+    if(document.getElementById("locais").value != ""){
+        for(let i=0; i<localInfos.length; i++){
+            if(document.getElementById("locais").value == localInfos[i]["nome"]){
+                document.getElementById("local-valor").placeholder = localInfos[i]["valor"]
+            }
+        }
+    }
+}
+
+function setLocalValue(){
+    if(document.getElementById("locais").value != ""){
+        console.log("ok")
+        document.getElementById("config_alugueis").style.display = 'none';
+    }
 }

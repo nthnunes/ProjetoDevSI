@@ -105,17 +105,14 @@
         </form>
       </div>
       <div id="config_alugueis" class="modal">
-        <form  class="formulario_modal">
+        <form onsubmit="setLocalValue()" class="formulario_modal">
           <label class="senha">Selecionar Local</label>
-          <select  class="input" type="text" >
-            <option value="">Selecione um Local</option>
-            <option value="">Local 1 </option>
-            <option value="">Local 2 </option>
-            <option value="">Local 3 </option>
+          <select onchange="getLocalValue()" id="locais" class="input" type="text" >
+            <option hidden value="">Selecione um Local</option>
           </select>
           <label class="senha" >Valor</label>
-          <input class="input" type="number" />
-          <button class="botao_modal">Salvar</button>
+          <input id="local-valor" class="input" placeholder=" "/>
+          <button type="submit" class="botao_modal">Salvar</button>
           <button class="botao_modal2">Excluir local</button>
           <div id = "" onclick="desaparecer('config_alugueis')"class="botao_modal3">Cancelar</div>
         </form>

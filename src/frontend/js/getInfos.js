@@ -51,3 +51,12 @@ recent("/options", {"type": true})
         document.getElementById("dias-max").placeholder = response.data.max
         document.getElementById("dias-min").placeholder = response.data.min
     })
+
+recent("/local", {"type": "get"})
+    .then(response => {
+        element = document.getElementById("locais")
+        localInfos = response.data.data
+        for(let i=0; i<localInfos.length; i++){
+            element.innerHTML = element.innerHTML + "<option value=\"" + localInfos[i]["nome"] + "\">" + localInfos[i]["nome"] + "</option>"
+        }
+    })
