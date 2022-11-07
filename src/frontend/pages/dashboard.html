@@ -92,16 +92,15 @@
         </form>
       </div>
 
-     
       <div id="config_sistema" class="modal">
-        <form  class="formulario_modal">
+        <form onsubmit="changeOptions()" class="formulario_modal">
           <label class="senha">Dias Para Cancelamento</label>
-          <input  class="input" type="text"  />
+          <input id="dias-cancel" class="input" type="text" placeholder=" " />
           <label class="senha">Dias Máximos Para Reserva</label>
-          <input  class="input" type="text"  />
+          <input id="dias-max" class="input" type="text" placeholder=" " />
           <label class="senha">Dias Mínimos Para Reserva</label>
-          <input id="confirm" class="input" type="text"  />
-          <button class="botao_modal">Salvar</button>
+          <input id="dias-min" class="input" type="text" placeholder=" " />
+          <button type="submit" class="botao_modal">Salvar</button>
           <div id = "" onclick="desaparecer('config_sistema')"class="botao_modal3">Cancelar</div>
         </form>
       </div>
@@ -151,8 +150,8 @@
     <script src="../js/calendario.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/getInfos.js"></script>
+    <script src="../js/admin.js" ></script>
     <script>
-      
         function aparecer(id){
           var display = document.getElementById(id).style.display;
 
@@ -169,7 +168,6 @@
           else
             document.getElementById(id).style.display = 'none';
         }
-
     </script>
   </body>
 </html>

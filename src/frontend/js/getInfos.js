@@ -1,10 +1,10 @@
-async function recent(id){
-    url = "https://devsiproject.vercel.app/recent"
+async function recent(url, body){
+    url = "https://devsiproject.vercel.app" + url
 
     const payload = {
         method: 'POST',
         headers: new Headers({"Content-Type": "application/json"}),
-        body: JSON.stringify({"id": id})
+        body: JSON.stringify(body)
     }
 
     let req = await fetch(url, payload)
@@ -21,7 +21,7 @@ async function recent(id){
     })
 }
 
-recent(window.localStorage.getItem('id'))
+recent("/recent", {"id": window.localStorage.getItem('id')})
     .then(response => {
         if(response.req.status == 200){
             element = document.getElementById("recent")
@@ -43,4 +43,11 @@ recent(window.localStorage.getItem('id'))
                 }
             }
         }
+    })
+
+recent("/options", {"type": true})
+    .then(response => {
+        document.getElementById("dias-cancel").placeholder = response.data.cancel
+        document.getElementById("dias-max").placeholder = response.data.max
+        document.getElementById("dias-min").placeholder = response.data.min
     })
