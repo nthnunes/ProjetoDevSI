@@ -28,6 +28,13 @@ api(window.localStorage.getItem('id'))
                 const welcome = document.getElementById("bem-vindo")
                 welcome.innerText = window.localStorage.getItem("nome")
             }
+            else{
+                document.getElementById("cancel").innerText = response.data.cancelamentos
+                document.getElementById("ganhos").innerText = response.data.ganhos
+                document.getElementById("locados-mes").innerText = response.data.locados
+                document.getElementById("locados-ano").innerText = response.data.locadosAno
+                document.getElementById("reservas").innerText = response.data.reservas
+            }
         }
     })
     .catch(response => {
