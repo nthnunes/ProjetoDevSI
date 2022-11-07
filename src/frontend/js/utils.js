@@ -38,7 +38,10 @@ function changePassword(){
         .then(response => {
             if(response.status == 200){
                 window.alert("Senha alterada com sucesso.")
-                modal.style.display = 'none';
+                document.getElementById("editar_senha").style.display = 'none';
+                document.getElementById("password").value = "";
+                document.getElementById("newpassword").value = "";
+                document.getElementById("confirm").value = "";
             }
             else{
                 window.alert("A senha atual está incorreta.")

@@ -1,4 +1,4 @@
-async function api(id){
+async function recent(id){
     url = "https://devsiproject.vercel.app/recent"
 
     const payload = {
@@ -21,7 +21,7 @@ async function api(id){
     })
 }
 
-api(window.localStorage.getItem('id'))
+recent(window.localStorage.getItem('id'))
     .then(response => {
         if(response.req.status == 200){
             element = document.getElementById("recent")

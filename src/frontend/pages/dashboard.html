@@ -80,13 +80,13 @@
       <div id="recent" class="direita"></div>
 
       <div id="editar_senha" class="modal">
-        <form  class="formulario_modal"></form>
+        <form onsubmit="changePassword()" class="formulario_modal">
           <label class="senha">Senha Atual</label>
-          <input  class="input" type="password"  />
+          <input id="password" class="input" type="password"/>
           <label class="senha">Nova Senha</label>
-          <input  class="input" type="password"  />
+          <input id="newpassword" class="input" type="password"/>
           <label class="senha">Confirmar Nova Senha</label>
-          <input id="confirm" class="input" type="password"  />
+          <input id="confirm" class="input" type="password"/>
           <button type="submit" class="botao_modal">Alterar</button>
           <div id = "" onclick="desaparecer('editar_senha')"class="botao_modal3">Cancelar</div>
         </form>
