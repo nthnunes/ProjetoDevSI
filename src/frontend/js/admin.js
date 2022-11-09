@@ -79,7 +79,16 @@ function getLocalValue(){
 
 function setLocalValue(){
     if(document.getElementById("locais").value != ""){
-        console.log("ok")
-        document.getElementById("config_alugueis").style.display = 'none';
+        body = {
+            "nome": document.getElementById("locais").value,
+            "valor": Number(document.getElementById("local-valor").value),
+            "type": "edit"
+        }
+
+        api("/local", body, 'POST', false)
+            .then(() => {
+                document.getElementById("config_alugueis").style.display = 'none'
+                getLocalValue()
+            })
     }
 }
