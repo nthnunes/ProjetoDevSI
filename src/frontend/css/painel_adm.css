@@ -98,6 +98,15 @@ body{
     text-decoration: none;
     font-size: 20px;
 }
+.input-div{
+    padding: 5px;
+    height: 40px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 20px;
+    border: 1px solid black;
+    text-align: center;
+}
 .senha{
     padding: 5px;
     width: 100%;
@@ -177,6 +186,10 @@ body{
     color: #005d7a;
     font-size: 1.2rem;
 
+}
+.botoes_esquerda:hover{
+    color: #207f9c;
+    cursor: pointer;
 }
 label{
     color: white;

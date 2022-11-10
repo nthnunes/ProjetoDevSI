@@ -105,14 +105,14 @@
         </form>
       </div>
       <div id="config_alugueis" class="modal">
-        <form onsubmit="setLocalValue()" class="formulario_modal">
+        <form onsubmit="setLocalValue()" id = "some-form" class="formulario_modal">
           <label class="senha">Selecionar Local</label>
           <select onchange="getLocalValue()" id="locais" class="input" type="text" >
             <option hidden value="">Selecione um Local</option>
           </select>
           <label class="senha" >Valor</label>
           <input id="local-valor" class="input" placeholder=" "/>
-          <button type="submit" class="botao_modal">Salvar</button>
+          <button class="botao_modal">Salvar</button>
           <button class="botao_modal2">Excluir local</button>
           <div id = "" onclick="desaparecer('config_alugueis')"class="botao_modal3">Cancelar</div>
         </form>
@@ -127,12 +127,12 @@
             <option value=""></option>
           </select>
           <label class="senha">Token</label>
-          <input class="input" type="text" href="#" />
+          <div class="input-div" type="text" href="#"><p class="" id=""></p></div>
            <div id = "" onclick="desaparecer('transferir_ususario')" class="botao_modal3">Cancelar</div>
         </form>
       </div>
       <div id="gerenciar_apartamentos" class="modal">
-        <form  class="formulario_modal">
+        <form class="formulario_modal" id = "some-form2">
           <label class="senha">Número do Apartamento</label>
           <input  class="input" type="number"  />
           <label class="senha">Descrição</label>
@@ -149,6 +149,14 @@
     <script src="../js/getInfos.js"></script>
     <script src="../js/admin.js" ></script>
     <script>
+      const form = document.getElementById('some-form')
+      form.addEventListener('submit', e => {
+      e.preventDefault()
+      })
+      const form2 = document.getElementById('some-form2')
+      form2.addEventListener('submit', e => {
+      e.preventDefault()
+      })
         function aparecer(id){
           var display = document.getElementById(id).style.display;
 
