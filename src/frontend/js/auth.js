@@ -30,7 +30,7 @@ api(window.localStorage.getItem('id'))
             }
             else{
                 document.getElementById("cancel").innerText = response.data.cancelamentos
-                document.getElementById("ganhos").innerText = response.data.ganhos
+                document.getElementById("ganhos").innerText = response.data.ganhos.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
                 document.getElementById("locados-mes").innerText = response.data.locados
                 document.getElementById("locados-ano").innerText = response.data.locadosAno
                 document.getElementById("reservas").innerText = response.data.reservas
