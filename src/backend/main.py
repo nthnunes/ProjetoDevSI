@@ -16,17 +16,20 @@ CORS(app)
 def homepage():
     return {"Name": "Condominium API", "Status": "OK", "Author": "Nathan Nunes"}
 
-
+# rota de login
 @app.route('/login', methods=['POST'])
 def login():
     req = request.get_json()
     coll = db.get_collection('users')
     query = coll.find_one({'email': req['email']})
 
+    # caso o email não exista retorna erro
     if query == None:
         return Response(status=403)
 
+    # verifica se a senha recebida é a mesma da presente no BD
     if query['senha'] == req['senha']:
+        # verifica as reservas que já passaram da data atual e altera o status para fechado
         coll = db.get_collection('reserva')
         data = coll.find({'status': 'aberto'})
 
@@ -35,6 +38,7 @@ def login():
             if (reserva['data'] - now).days <= 0:
                 coll.update_one({"_id": reserva['_id']}, {'$set': {'status': 'fechado'}})
 
+        # retorna o json para usuário administrador ou não
         if query['permissao'] == True:
             return {'id': str(query['_id']), 'permissao': query['permissao']}
         else:
@@ -139,14 +143,17 @@ def resetPassword():
     return Response(status=200)
 
 
+# retorna dados para painel de informações
 @app.route('/infos', methods=['POST'])
 def infos():
     req = request.get_json()
     coll = db.get_collection('users')
     query = coll.find_one({'_id': ObjectId(req['id'])})
 
+    # verifica se o id do usuário é válido
     if query == None:
         return Response(status=401)
+    # continua a execução se o usuário for administrador
     if query['permissao'] != True:
         return {"permissao": query['permissao']}
 
@@ -258,14 +265,17 @@ def searchCalendar():
     return data
 
 
+# retorna últimos 5 aluguéis
 @app.route('/recent', methods=['POST'])
 def recent():
     req = request.get_json()
     coll = db.get_collection('users')
     query = coll.find_one({"_id": ObjectId(req['id'])})
 
+    # verifica qual a permissão do usuário para retornar o devido json
     cont = 0
     if query['permissao'] == True:
+        # caso o usuário seja administrador retorna as últimas 5 reservas considerando todos os usuários
         coll = db.get_collection('reserva')
         query = coll.find({'status': 'aberto'}).sort('data', ASCENDING)
 
@@ -296,6 +306,7 @@ def recent():
 
         return {'data': data, 'permissao': True}
     else:
+        # caso não seja administrador retorna as últimas 5 reservas do usuários que enviou a requisição
         coll = db.get_collection('apto')
         query = coll.find_one({"id_user": ObjectId(req['id'])})
 
@@ -323,20 +334,24 @@ def recent():
         return {'data': data, 'permissao': False}
 
 
+# gerencia os apartamentos
 @app.route('/apto', methods=['POST'])
 def addApto():
     req = request.get_json()
     coll = db.get_collection('apto')
 
+    # deleta um apartamento
     if 'type' in req:
         if coll.find_one({'numero': req['numero']}) == None:
             return Response(status=404)
         coll.delete_one({'numero': req['numero']})
         return Response(status=200)
 
+    # verifica se o apartamento já existe
     if coll.find_one({'numero': req['numero']}) != None:
         return Response(status=409)
 
+    # cria um objeto e inseri o novo apartamento no banco
     apto = Apto(req['descricao'], req['numero'])
     data = {
         'numero': apto.getNumero(),
@@ -348,19 +363,23 @@ def addApto():
     return Response(status=200)
 
 
+# troca de senha a partir do painel
 @app.route('/password', methods=['POST'])
 def changePassword():
     req = request.get_json()
     coll = db.get_collection('users')
     query = coll.find_one({"_id": ObjectId(req['id']), "senha": req['password']})
 
+    # verifica se o id é válido
     if query == None:
         return Response(status=401)
 
+    # altera a senha para a nova senha recebida
     coll.update_one({"_id": ObjectId(req['id'])}, {'$set': {"senha": req['newpassword']}})
     return Response(status=200)
 
 
+# gerencia as configurações de sistema
 @app.route('/options', methods=['POST'])
 def configs():
     req = request.get_json()
@@ -369,6 +388,7 @@ def configs():
     coll = db.get_collection('options')
     query = coll.find_one({"_id": id})
 
+    # busca as informações no banco e retorna o json
     if 'type' in req:
         query = coll.find_one({"_id": id})
         return {
@@ -377,6 +397,7 @@ def configs():
             "min": query['dias_min_reserva']
         }
 
+    # altera os campos de acordo com os campos recebidos na requisição
     if 'cancel' in req:
         coll.update_one({"_id": id}, {'$set': {"dias_cancel": req['cancel']}})
     if 'max' in req:
@@ -387,11 +408,13 @@ def configs():
     return Response(status=200)
 
 
+# gerencia as informações dos locais
 @app.route('/local', methods=['POST'])
 def local():
     req = request.get_json()
     coll = db.get_collection('local')
 
+    # retorna todos os lugares existentes
     if req['type'] == "get":
         query = coll.find()
 
@@ -404,20 +427,24 @@ def local():
             data.append(temp)
         return {'data': data}
 
+    # deleta um local
     if req['type'] == "delete":
         coll.delete_one({'nome': req['nome']})
         return Response(status=200)
 
     local = Local(req['nome'], req['valor'])
 
+    # edita o valor do aluguel de um local
     if req['type'] == "edit":
         coll.update_one({'nome': local.getNome()}, {'$set': {'valor': local.getValor()}})
         return Response(status=200)
 
+    # cria um novo local
     coll.insert_one({'nome': local.getNome(), 'valor': local.getValor()})
     return Response(status=200)
 
 
+# retorna o token presente no banco
 @app.route('/transfer', methods=['POST'])
 def transferUser():
     req = request.get_json()

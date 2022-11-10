@@ -1,30 +1,24 @@
 import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import email.message
 from pymongo import MongoClient
 
-def sendEmail(email, token):
-    subject = "Redefinição de senha"
-    message = ("Para redefinir sua senha acesse: https://nthnunes.github.io/ProjetoDevSI/resetpassword e informe o TOKEN: " +
-                token + "\n\nAtenção! Não responda esse email.")
+def sendEmail(toMail, token):
+    mail = ("Para redefinir sua senha acesse: https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/resetpassword.html e informe o TOKEN: " +
+                token)
 
-    MY_ADDRESS = "devsiproject@airmail.cc"
-    PASSWORD = ""
+    msg = email.message.Message()
+    msg['Subject'] = "Redefinição de senha - Não responda!"
+    msg['From'] = "devsiproject@gmail.com"
+    msg['To'] = toMail
+    password = ""
+    msg.add_header('Content-type', 'text/html')
+    msg.set_payload(mail)
 
-    mail = smtplib.SMTP(host='mail.cock.li', port="587")
-    mail.starttls()
-    mail.login(MY_ADDRESS, PASSWORD)
+    s = smtplib.SMTP('smtp.gmail.com: 587')
+    s.starttls()
 
-    msg = MIMEMultipart()
-
-    msg['From'] = MY_ADDRESS
-    msg['To'] = email
-    msg['Subject'] = subject
-
-    msg.attach(MIMEText(message, 'plain'))
-    mail.send_message(msg)
-        
-    del msg
+    s.login(msg['From'], password)
+    s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
 
 
 def dbConnection(username, password):
