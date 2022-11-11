@@ -200,10 +200,9 @@ h1{
 }
 
 .calendar {
-    
-    /* height: max-content;
-    width: max-content; */
-    width:100%;
+    justify-content: center;
+    justify-items: center;
+    width:50vw;
     height: 100%;
     background-color: var(--bg-main);
     border-radius: 15px;
@@ -220,21 +219,27 @@ h1{
 }
 
 .calendar-header {
+    
+    width: 100%!important;
     display: flex;
     gap: 10px;
-    /* justify-content: space-between; */
     align-items: center;
-    font-size: 25px;
+    font-size: 1.3vw;
     font-weight: 600;
     color: var(--color-txt);
     padding: 10px;
 }
 
 .calendar-body {
+    
+    width:40vw!important;
     padding: 10px;
 }
 
 .calendar-week-day {
+    font-size: 1.3vw;
+    gap: 1vw;
+    width:40vw;
     height: 50px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -242,12 +247,14 @@ h1{
 }
 
 .calendar-week-day div {
+    font-size: 1.3vw;
     display: grid;
     place-items: center;
     color: var(--bg-second);
 }
 
 .calendar-days {
+    width: 40vw!important; 
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 2px;
@@ -255,12 +262,11 @@ h1{
 }
 
 .calendar-days div {
-    width: 70px;
+    width:100%!important;   
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
     position: relative;
     cursor: pointer;
     animation: to-top 1s forwards;
@@ -355,7 +361,7 @@ h1{
     cursor: pointer;
 }
 .location-picker{
-    margin-left: 40%;
+    margin-left: 10vw;
    
 }
 .year-change {
@@ -474,5 +480,16 @@ h1{
 @media only screen and (max-width: 705px) {
     .titulo{
         font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 631px) {
+    .location-picker{
+        margin-left: 0px;
+    }
+}
+@media only screen and (max-width: 625px) {
+    .logout{
+        display: flex;
     }
 }

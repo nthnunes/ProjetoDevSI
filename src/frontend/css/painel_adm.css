@@ -246,9 +246,8 @@ label{
 }
 
 .calendar {
-    
-    /* height: max-content;
-    width: max-content; */
+    justify-content: center;
+    justify-items: center;
     width:50vw;
     height: 100%;
     background-color: var(--bg-main);
@@ -266,22 +265,27 @@ label{
 }
 
 .calendar-header {
-    width: 60vw;
+    
+    width: 100%!important;
     display: flex;
     gap: 10px;
-    
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1.3vw;
     font-weight: 600;
     color: var(--color-txt);
     padding: 10px;
 }
 
 .calendar-body {
+    
+    width:40vw!important;
     padding: 10px;
 }
 
 .calendar-week-day {
+    font-size: 1.3vw;
+    gap: 1vw;
+    width:40vw;
     height: 50px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -289,12 +293,14 @@ label{
 }
 
 .calendar-week-day div {
+    font-size: 1.3vw;
     display: grid;
     place-items: center;
     color: var(--bg-second);
 }
 
 .calendar-days {
+    width: 40vw!important; 
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 2px;
@@ -302,12 +308,11 @@ label{
 }
 
 .calendar-days div {
-    width: 100%;
+    width:100%!important;   
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
     position: relative;
     cursor: pointer;
     animation: to-top 1s forwards;
@@ -402,7 +407,7 @@ label{
     cursor: pointer;
 }
 .location-picker{
-    margin-left: 40%;
+    margin-left: 10vw;
    
 }
 .year-change {
@@ -511,24 +516,12 @@ label{
     .calendar-header {
         width: 47vw;
     } 
-    .location-picker{
-        margin-left: 17%;
-    }    
-}
-@media (max-width:1150px){
-    .location-picker{
-        margin-left: 30%;
-    }    
+     
 }
 
-@media (max-width:860px){
+@media only screen and (max-width: 631px) {
     .location-picker{
-        margin-left: 17%;
-    }    
-}
-@media (max-width:768px){
-    .location-picker{
-        margin-left: 2%;
-    }    
+        margin-left: 0px;
+    }
 }
 
