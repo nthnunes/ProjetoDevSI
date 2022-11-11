@@ -77,6 +77,20 @@ function getLocalValue(){
     }
 }
 
+function reloadLocal(){
+    api("/local", {"type": "get"}, 'POST', true)
+        .then(response => {
+            document.getElementById("local-valor").value = ""
+            element = document.getElementById("locais")
+            localInfos = response.data.data
+            for(let i=0; i<localInfos.length; i++){
+                if(document.getElementById("locais").value == localInfos[i]["nome"]){
+                    document.getElementById("local-valor").placeholder = localInfos[i]["valor"]
+                }
+            }
+        })
+}
+
 function setLocalValue(){
     if(document.getElementById("locais").value != ""){
         body = {
@@ -88,7 +102,7 @@ function setLocalValue(){
         api("/local", body, 'POST', false)
             .then(() => {
                 document.getElementById("config_alugueis").style.display = 'none'
-                getLocalValue()
+                reloadLocal()
             })
     }
 }
