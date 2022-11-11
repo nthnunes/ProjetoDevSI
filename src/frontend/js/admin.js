@@ -106,3 +106,13 @@ function setLocalValue(){
             })
     }
 }
+
+function getAptoToken(){
+    if(document.getElementById("tranfer-user").value != ""){
+        for(let i=0; i<aptoInfos.length; i++){
+            if(document.getElementById("tranfer-user").value == aptoInfos[i]["apto"]){
+                document.getElementById("token-apto").innerText = aptoInfos[i]["token"]
+            }
+        }
+    }
+}

@@ -120,14 +120,11 @@
       <div id="transferir_ususario" class="modal">
         <form  class="formulario_modal">
           <label class="senha">Buscar Apartamento</label>
-          <select  class="input" type="text" >
-            <option value="">Selecione</option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
+          <select onchange="getAptoToken()" id="tranfer-user" class="input" type="text" >
+            <option hidden value="">Selecione um Apartamento</option>
           </select>
           <label class="senha">Token</label>
-          <div class="input-div" type="text" href="#"><p class="" id=""></p></div>
+          <div class="input-div" type="text" href="#"><p class="" id="token-apto"></p></div>
            <div id = "" onclick="desaparecer('transferir_ususario')" class="botao_modal3">Cancelar</div>
         </form>
       </div>

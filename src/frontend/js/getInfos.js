@@ -60,3 +60,12 @@ recent("/local", {"type": "get"})
             element.innerHTML = element.innerHTML + "<option value=\"" + localInfos[i]["nome"] + "\">" + localInfos[i]["nome"] + "</option>"
         }
     })
+
+recent("/transfer", {"type": true})
+    .then(response => {
+        element = document.getElementById("tranfer-user")
+        aptoInfos = response.data.data
+        for(let i=0; i<aptoInfos.length; i++){
+            element.innerHTML = element.innerHTML + "<option value=\"" + aptoInfos[i]["apto"] + "\">" + aptoInfos[i]["apto"] + "</option>"
+        }
+    })
