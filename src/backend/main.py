@@ -447,11 +447,16 @@ def local():
 # retorna o token presente no banco
 @app.route('/transfer', methods=['POST'])
 def transferUser():
-    req = request.get_json()
     coll = db.get_collection('apto')
-    query = coll.find_one({"numero": req['numero']})
+    query = coll.find()
 
-    return {"token": query['token']}
+    data = []
+    for i in query:
+        data.append({
+            "apto": i['descricao'],
+            "token": i['token']
+        })
+    return {"data": data}
 
 
 if __name__ == '__main__':
