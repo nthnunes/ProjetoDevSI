@@ -41,6 +41,7 @@ function login(){
         .then(response => {
             if(response.req.status == 200){
                 localStorage.setItem("id", response.data.id)
+                // identifica se o usuário é adm ou não e direciona para o respectivo painel
                 if(response.data.permissao == true){
                     window.location.replace("https://nthnunes.github.io/ProjetoDevSI/src/frontend/pages/dashboard.html")
                 }
@@ -57,6 +58,7 @@ function register(){
     event.preventDefault()
     route = "/register"
 
+    // valida o email
     email = document.getElementById("email").value
     regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if(email.match(regex) == null){
@@ -64,6 +66,7 @@ function register(){
         return false
     }
 
+    // valida a complexidade da senha
     pwd = document.getElementById("senha").value
     regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,25}$/g;
     if(pwd.match(regex) == null) {
@@ -79,6 +82,7 @@ function register(){
         "senha": document.getElementById("senha").value
     }
 
+    // faz o envio da requisição
     api(route, body, 'POST', false)
         .then(response => {
             if(response.req.status == 200){
@@ -93,6 +97,7 @@ function forgetPassword(){
     event.preventDefault()
     route = "/resetpassword"
 
+    // valida o email
     email = document.getElementById("email").value
     regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     if(email.match(regex) == null){
@@ -104,6 +109,7 @@ function forgetPassword(){
         "email": document.getElementById("email").value
     }
 
+    // requisição sempre retorna sucesso, mas só faz o envio do email se estiver correto no banco
     api(route, body, 'POST', false)
         .then(response => {
             window.alert("Se os dados estiverem corretos você receberá um email contendo um token para redifinir sua senha.")
@@ -115,11 +121,13 @@ function resetPassword(){
     event.preventDefault()
     route = "/resetpassword"
 
+    // verifica se senha e a confirmação são iguais
     if(document.getElementById("senha").value != document.getElementById("confirm").value){
         window.alert("As senhas não coincidem, tente novamente!")
         return false
     }
 
+    // valida a complexidade da senha
     pwd = document.getElementById("senha").value
     regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,25}$/g;
     if(pwd.match(regex) == null) {

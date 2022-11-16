@@ -28,10 +28,12 @@ async function api(url, body, method, res){
     })
 }
 
+// altera as configurações de sistema
 function changeOptions(){
     event.preventDefault()
     route = "/options"
 
+    // verifica quais campos contém algum valor e faz o envio das informações
     if(document.getElementById("dias-cancel").value != ""){
         api(route, {"cancel": document.getElementById("dias-cancel").value}, 'POST', false)
             .then(() => {
@@ -58,6 +60,7 @@ function changeOptions(){
     }
 }
 
+// recarrega as configurações de sistema
 function reloadOptions(){
     api("/options", {"type": true}, 'POST', true)
         .then(response => {
@@ -67,6 +70,7 @@ function reloadOptions(){
         })
 }
 
+// obtém os dados dos locais
 function getLocalValue(){
     if(document.getElementById("locais").value != ""){
         for(let i=0; i<localInfos.length; i++){
@@ -77,6 +81,7 @@ function getLocalValue(){
     }
 }
 
+// recarrega os valores dos locais
 function reloadLocal(){
     api("/local", {"type": "get"}, 'POST', true)
         .then(response => {
@@ -91,6 +96,7 @@ function reloadLocal(){
         })
 }
 
+// altera o valor de um local
 function setLocalValue(){
     if(document.getElementById("locais").value != ""){
         body = {
@@ -107,6 +113,7 @@ function setLocalValue(){
     }
 }
 
+// obtém o token dos apartamentos
 function getAptoToken(){
     if(document.getElementById("tranfer-user").value != ""){
         for(let i=0; i<aptoInfos.length; i++){

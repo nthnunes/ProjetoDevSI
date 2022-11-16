@@ -21,13 +21,16 @@ async function api(id){
     })
 }
 
+// verifica se o id salvo é válido
 api(window.localStorage.getItem('id'))
     .then(response => {
         if(response.req.status == 200){
+            // se o id pertença a um usuário comum altera o texto com o nome salvo
             if(response.data.permissao == false){
                 const welcome = document.getElementById("bem-vindo")
                 welcome.innerText = window.localStorage.getItem("nome")
             }
+            // caso o id seja de um usuário administrador preenche os dados das estatística
             else{
                 document.getElementById("cancel").innerText = response.data.cancelamentos
                 document.getElementById("ganhos").innerText = response.data.ganhos.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
